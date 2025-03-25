@@ -91,14 +91,17 @@ export default function Products() {
   }, [category, priceRange, sortBy]);
 
   const categories = ["all", ...Array.from(new Set(products.map((product) => product.category)))];
-  
+
   // Pagination logic
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
   const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
   const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
 
-  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+  const paginate = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   return (
     <>
@@ -107,7 +110,7 @@ export default function Products() {
           {/* Header and Filters */}
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12">
             <Header title="Our Products" highlight="Products" className="relative static md:absolute" />
-            
+
             <motion.div 
               className="flex flex-col sm:flex-row gap-4 mt-16 md:mt-0"
               initial={{ opacity: 0, y: -20 }}
@@ -126,7 +129,7 @@ export default function Products() {
                   ))}
                 </SelectContent>
               </Select>
-              
+
               {/* Price Filter */}
               <Select value={priceRange} onValueChange={setPriceRange}>
                 <SelectTrigger className="w-[180px] bg-dark/80 text-light border border-muted rounded-lg">
@@ -140,7 +143,7 @@ export default function Products() {
                   <SelectItem value="over-200">$200+</SelectItem>
                 </SelectContent>
               </Select>
-              
+
               {/* Sort Filter */}
               <Select value={sortBy} onValueChange={(value) => setSortBy(value as SortOption)}>
                 <SelectTrigger className="w-[180px] bg-dark/80 text-light border border-muted rounded-lg">
@@ -155,7 +158,7 @@ export default function Products() {
               </Select>
             </motion.div>
           </div>
-          
+
           {/* Products Grid */}
           <motion.div 
             className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
@@ -182,7 +185,7 @@ export default function Products() {
               )}
             </AnimatePresence>
           </motion.div>
-          
+
           {/* Pagination */}
           {filteredProducts.length > productsPerPage && (
             <motion.div 
@@ -200,7 +203,7 @@ export default function Products() {
                 >
                   <FaChevronLeft className="h-4 w-4" />
                 </Button>
-                
+
                 {Array.from({ length: totalPages }).map((_, index) => (
                   <Button
                     key={index}
@@ -215,7 +218,7 @@ export default function Products() {
                     {index + 1}
                   </Button>
                 ))}
-                
+
                 <Button 
                   onClick={() => paginate(Math.min(totalPages, currentPage + 1))}
                   disabled={currentPage === totalPages}
