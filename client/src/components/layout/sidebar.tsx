@@ -78,7 +78,7 @@ export default function Sidebar() {
       <Button
         onClick={toggleSidebar}
         variant="ghost"
-        className="hidden lg:flex fixed top-4 left-4 z-50 p-2 bg-background/80 backdrop-blur-sm rounded-full text-primary shadow-md hover:bg-primary/10 transition-all duration-200"
+        className="hidden lg:flex fixed top-4 left-4 z-50 p-2 bg-background/80 backdrop-blur-sm rounded-full text-green-500 shadow-md hover:bg-green-500/10 transition-all duration-200"
         aria-label="Toggle sidebar"
       >
         <FaCube className="h-5 w-5" />
@@ -184,7 +184,7 @@ export default function Sidebar() {
           >
             <div className="p-5">
               <Link href="/" className="flex items-center space-x-4">
-                <div className="flex-shrink-0 text-primary text-2xl">
+                <div className="flex-shrink-0 text-green-500 text-2xl">
                   <FaCube />
                 </div>
                 <AnimatePresence mode="wait">
