@@ -10,7 +10,11 @@ export default function ThemeToggle() {
     <Button
       variant="outline"
       size="icon"
-      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+      onClick={() => {
+        const newTheme = theme === "dark" ? "light" : "dark";
+        console.log(`Switching theme from ${theme} to ${newTheme}`);
+        setTheme(newTheme);
+      }}
       className="fixed top-4 right-20 z-[60] h-8 w-8 rounded-full bg-background/80 backdrop-blur-sm hover:bg-accent transition-all duration-200"
     >
       {theme === "dark" ? (
