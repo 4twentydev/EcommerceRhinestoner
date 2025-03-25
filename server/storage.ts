@@ -85,7 +85,12 @@ export class MemStorage implements IStorage {
 
   async createProduct(insertProduct: InsertProduct): Promise<Product> {
     const id = this.productId++;
-    const product: Product = { ...insertProduct, id };
+    const product: Product = { 
+      ...insertProduct, 
+      id,
+      isNew: insertProduct.isNew ?? false,
+      stock: insertProduct.stock ?? 10
+    };
     this.products.set(id, product);
     return product;
   }
@@ -93,7 +98,13 @@ export class MemStorage implements IStorage {
   // Order operations
   async createOrder(insertOrder: InsertOrder): Promise<Order> {
     const id = this.orderId++;
-    const order: Order = { ...insertOrder, id };
+    const order: Order = { 
+      ...insertOrder, 
+      id, 
+      status: insertOrder.status || 'pending',
+      userId: insertOrder.userId ?? null,
+      stripeSessionId: insertOrder.stripeSessionId ?? null
+    };
     this.orders.set(id, order);
     return order;
   }
@@ -110,7 +121,12 @@ export class MemStorage implements IStorage {
 
   async addOrderItem(insertOrderItem: InsertOrderItem): Promise<OrderItem> {
     const id = this.orderItemId++;
-    const orderItem: OrderItem = { ...insertOrderItem, id };
+    const orderItem: OrderItem = { 
+      ...insertOrderItem, 
+      id,
+      size: insertOrderItem.size ?? null,
+      color: insertOrderItem.color ?? null
+    };
     this.orderItems.set(id, orderItem);
     return orderItem;
   }

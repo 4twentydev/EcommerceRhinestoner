@@ -13,6 +13,7 @@ import ThemeToggle from "@/components/layout/theme-toggle";
 import SocialLinks from "@/components/layout/social-links";
 import Footer from "@/components/layout/footer";
 import NotFound from "@/pages/not-found";
+import { CartProvider } from "@/context/cart-context";
 
 function Router() {
   return (
@@ -30,17 +31,19 @@ function Router() {
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="bg-dark text-light overflow-x-hidden">
-        <ThemeToggle />
-        <Sidebar />
-        <CartPanel />
-        <SocialLinks />
-        <main className="w-full">
-          <Router />
-          <Footer />
-        </main>
-      </div>
-      <Toaster />
+      <CartProvider>
+        <div className="bg-dark text-light overflow-x-hidden">
+          <ThemeToggle />
+          <Sidebar />
+          <CartPanel />
+          <SocialLinks />
+          <main className="w-full">
+            <Router />
+            <Footer />
+          </main>
+        </div>
+        <Toaster />
+      </CartProvider>
     </QueryClientProvider>
   );
 }
