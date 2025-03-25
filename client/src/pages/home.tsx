@@ -133,9 +133,12 @@ export default function Home() {
         {/* Video Background with Dark Overlay */}
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-black/40 z-10"></div>
-          <video className="w-full h-full object-cover" autoPlay loop muted playsInline>
-            <source src="/BG.mp4" type="video/mp4" />
-          </video>
+          {/* Using regular img as fallback */}
+          <img
+            src="/BG.svg" 
+            alt="Hero Background"
+            className="w-full h-full object-cover"
+          />
         </div>
         
         {/* Hero Content */}
