@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { useCart } from "@/hooks/use-cart";
 import { Product } from "@/lib/utils";
 import { FaMinus, FaPlus, FaTimes, FaStar, FaStarHalfAlt } from "react-icons/fa";
 
@@ -9,24 +8,31 @@ type ProductModalProps = {
   product: Product | null;
   isOpen: boolean;
   onClose: () => void;
+  onAddToCart?: (product: Product, quantity: number, size?: string, color?: string) => void;
 };
 
-export default function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
+export default function ProductModal({ 
+  product, 
+  isOpen, 
+  onClose,
+  onAddToCart 
+}: ProductModalProps) {
   const [selectedSize, setSelectedSize] = useState<string>("");
   const [selectedColor, setSelectedColor] = useState<string>("");
   const [quantity, setQuantity] = useState(1);
   const [activeImage, setActiveImage] = useState(0);
-  const { addToCart } = useCart();
-
+  
   const handleAddToCart = () => {
     if (!product) return;
     
-    addToCart({
-      product,
-      quantity,
-      size: selectedSize || undefined,
-      color: selectedColor || undefined,
-    });
+    if (onAddToCart) {
+      onAddToCart(
+        product,
+        quantity,
+        selectedSize || undefined,
+        selectedColor || undefined
+      );
+    }
     
     onClose();
   };

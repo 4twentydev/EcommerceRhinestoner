@@ -21,7 +21,7 @@ type CartContextType = {
   getTotalPrice: () => number;
 };
 
-const CartContext = createContext<CartContextType | undefined>(undefined);
+export const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
@@ -131,10 +131,4 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   );
 }
 
-export const useCart = () => {
-  const context = useContext(CartContext);
-  if (context === undefined) {
-    throw new Error("useCart must be used within a CartProvider");
-  }
-  return context;
-};
+// useCart function moved to hooks/use-cart.ts

@@ -5,6 +5,8 @@ import Header from "@/components/layout/header";
 import ProductCard from "@/components/products/product-card";
 import ProductModal from "@/components/products/product-modal";
 import { products, Product } from "@/lib/utils";
+import { useCart } from "@/hooks/use-cart";
+import { useToast } from "@/hooks/use-toast";
 import {
   Select,
   SelectContent,
