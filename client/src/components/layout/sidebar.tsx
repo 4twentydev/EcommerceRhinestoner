@@ -23,7 +23,7 @@ const navItems = [
 
 export default function Sidebar() {
   const [location] = useLocation();
-  const [isExpanded, setIsExpanded] = useState(true);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   const toggleSidebar = () => {
     setIsExpanded(!isExpanded);
@@ -31,7 +31,7 @@ export default function Sidebar() {
 
   return (
     <div className="fixed top-0 left-0 h-full z-40 flex">
-      {/* Toggle Button (Mobile Only) */}
+      {/* Toggle Button for Mobile */}
       <Button 
         onClick={toggleSidebar}
         variant="ghost" 
@@ -39,14 +39,23 @@ export default function Sidebar() {
       >
         {isExpanded ? <FaTimes /> : <FaBars />}
       </Button>
+      
+      {/* Toggle Button for Desktop */}
+      <Button 
+        onClick={toggleSidebar}
+        variant="ghost" 
+        className="fixed top-4 left-4 ml-12 z-50 p-2 text-foreground bg-background/80 backdrop-blur-sm rounded-full hover:bg-accent/10 transition-colors duration-200 hidden lg:flex"
+      >
+        {isExpanded ? <FaTimes className="h-4 w-4" /> : <FaBars className="h-4 w-4" />}
+      </Button>
 
       {/* Sidebar */}
       <motion.div 
         className={cn(
-          "h-full bg-dark/90 backdrop-blur-md shadow-xl transition-all duration-300 ease-in-out overflow-hidden",
+          "h-full bg-primary/10 dark:bg-primary/5 backdrop-blur-md shadow-xl transition-all duration-300 ease-in-out overflow-hidden border-r border-border/50",
           isExpanded ? "w-64" : "w-16"
         )}
-        initial={false}
+        initial={{ width: "4rem" }}
         animate={{ width: isExpanded ? "16rem" : "4rem" }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
       >
@@ -80,7 +89,7 @@ export default function Sidebar() {
                   "flex items-center space-x-3 p-3 rounded-lg transition-colors",
                   location === item.path 
                     ? "bg-primary/20 text-primary" 
-                    : "text-light hover:bg-primary/20"
+                    : "text-foreground hover:bg-primary/10"
                 )}
               >
                 {item.icon}
@@ -101,7 +110,7 @@ export default function Sidebar() {
             
             <Link 
               href="#login" 
-              className="flex items-center space-x-3 p-3 rounded-lg text-dark bg-primary hover:bg-primary/80 transition-colors mt-8"
+              className="flex items-center space-x-3 p-3 rounded-lg text-primary-foreground bg-primary hover:bg-primary/80 transition-colors mt-8"
             >
               <FaSignInAlt className="w-6 text-center" />
               <AnimatePresence>
