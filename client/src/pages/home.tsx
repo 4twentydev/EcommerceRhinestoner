@@ -332,6 +332,73 @@ export default function Home() {
         </div>
       </Section>
       
+      {/* Get in Touch Section */}
+      <Section id="contact" className="relative">
+        {/* This will be replaced with BG.png once we have it */}
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-primary/40">
+          {/* Will add background image here once available */}
+        </div>
+        <div className="container mx-auto px-6 py-20 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true, amount: 0.3 }}
+            className="max-w-3xl mx-auto"
+          >
+            <div className="bg-background/90 backdrop-blur-sm p-8 rounded-lg shadow-lg">
+              <h2 className="text-3xl md:text-4xl font-heading mb-6 text-center">Get in Touch</h2>
+              <p className="text-foreground/80 text-center mb-8">
+                Have questions about our products or need assistance with your order? 
+                We're here to help.
+              </p>
+              <form className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label htmlFor="name" className="block text-sm font-medium mb-2">
+                      Name
+                    </label>
+                    <input
+                      id="name"
+                      type="text"
+                      className="w-full px-4 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50"
+                      placeholder="Your name"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium mb-2">
+                      Email
+                    </label>
+                    <input
+                      id="email"
+                      type="email"
+                      className="w-full px-4 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50"
+                      placeholder="Your email"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label htmlFor="message" className="block text-sm font-medium mb-2">
+                    Message
+                  </label>
+                  <textarea
+                    id="message"
+                    rows={4}
+                    className="w-full px-4 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50"
+                    placeholder="How can we help you?"
+                  ></textarea>
+                </div>
+                <div className="text-center">
+                  <Button className="px-8 py-3 bg-primary text-primary-foreground font-medium rounded-full hover:bg-primary/90 transition-colors">
+                    Send Message
+                  </Button>
+                </div>
+              </form>
+            </div>
+          </motion.div>
+        </div>
+      </Section>
+      
       {/* Product Detail Modal with cart functionality */}
       <ProductModal 
         product={selectedProduct} 
