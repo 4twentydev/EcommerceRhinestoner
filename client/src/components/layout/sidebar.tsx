@@ -61,6 +61,11 @@ export default function Sidebar() {
     setIsMobileMenuOpen(false);
     document.body.style.overflow = 'auto';
   };
+  
+  // Handle sidebar link click - auto collapse sidebar
+  const handleSidebarLinkClick = () => {
+    setIsExpanded(false);
+  };
 
   return (
     <>
@@ -183,7 +188,7 @@ export default function Sidebar() {
             transition={{ duration: 0.3, ease: "easeInOut" }}
           >
             <div className="p-5">
-              <Link href="/" className="flex items-center space-x-4">
+              <Link href="/" onClick={handleSidebarLinkClick} className="flex items-center space-x-4">
                 <div className="flex-shrink-0 text-green-500 text-3xl">
                   <FaCube />
                 </div>
@@ -208,6 +213,7 @@ export default function Sidebar() {
                   <Link 
                     key={item.path} 
                     href={item.path}
+                    onClick={handleSidebarLinkClick}
                     className={cn(
                       "flex items-center space-x-3 p-3 rounded-lg transition-colors",
                       location === item.path 
@@ -233,6 +239,7 @@ export default function Sidebar() {
                 
                 <Link 
                   href="#login" 
+                  onClick={handleSidebarLinkClick}
                   className="flex items-center space-x-3 p-3 rounded-lg text-primary-foreground bg-primary hover:bg-primary/80 transition-colors mt-8"
                 >
                   <FaSignInAlt className="w-6 text-center" />
