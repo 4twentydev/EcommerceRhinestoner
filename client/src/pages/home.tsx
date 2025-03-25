@@ -338,7 +338,10 @@ export default function Home() {
         <div 
           className="absolute inset-0 bg-no-repeat bg-cover bg-center"
           style={{ backgroundImage: 'url("/BG.svg")' }}
-        ></div>
+        >
+          {/* Add a slight overlay for better text contrast */}
+          <div className="absolute inset-0 bg-gradient-to-r from-background/30 to-primary/20"></div>
+        </div>
         <div className="container mx-auto px-6 py-20 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

@@ -27,8 +27,15 @@ export default function Products() {
   const [sortBy, setSortBy] = useState<SortOption>("newest");
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 8;
-  const { addToCart } = useCart();
   const { toast } = useToast();
+  
+  // Handle cart functionality safely
+  let cartFunctions = { addToCart: (cartItem: any) => {} };
+  try {
+    cartFunctions = useCart();
+  } catch (error) {
+    console.warn("Cart context not available in Products:", error);
+  }
 
   useEffect(() => {
     const handleOpenProductModal = (e: Event) => {
@@ -109,7 +116,7 @@ export default function Products() {
   
   const handleAddToCart = (product: Product, quantity: number, size?: string, color?: string) => {
     try {
-      addToCart({
+      cartFunctions.addToCart({
         product,
         quantity,
         size,
