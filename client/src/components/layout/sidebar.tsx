@@ -180,7 +180,7 @@ export default function Sidebar() {
           {/* Desktop Sidebar Content */}
           <motion.div 
             className={cn(
-              "h-full bg-primary/5 backdrop-blur-md shadow-xl transition-all overflow-hidden border-r border-border/50",
+              "h-full bg-white/40 backdrop-blur-md shadow-xl transition-all overflow-hidden border-r border-border/50",
               isExpanded ? "w-64" : "w-16"
             )}
             initial={{ width: "4rem" }}
@@ -217,8 +217,8 @@ export default function Sidebar() {
                     className={cn(
                       "flex items-center space-x-3 p-3 rounded-lg transition-colors",
                       location === item.path 
-                        ? "bg-primary/20 text-primary" 
-                        : "text-foreground hover:bg-primary/10"
+                        ? "bg-green-500/20 text-green-500" 
+                        : "text-foreground hover:bg-green-500/10"
                     )}
                   >
                     {item.icon}
@@ -240,7 +240,7 @@ export default function Sidebar() {
                 <Link 
                   href="#login" 
                   onClick={handleSidebarLinkClick}
-                  className="flex items-center space-x-3 p-3 rounded-lg text-primary-foreground bg-primary hover:bg-primary/80 transition-colors mt-8"
+                  className="flex items-center space-x-3 p-3 rounded-lg text-white bg-green-500 hover:bg-green-600 transition-colors mt-8"
                 >
                   <FaSignInAlt className="w-6 text-center" />
                   <AnimatePresence mode="wait">
