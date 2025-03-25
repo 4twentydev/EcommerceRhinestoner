@@ -145,15 +145,13 @@ export default function Home() {
           <div className="absolute inset-0 bg-black/40 z-10"></div>
           <video 
             className="w-full h-full object-cover" 
+            src="/videos/hero-background.mp4"
             autoPlay 
             loop 
             muted 
             playsInline
             preload="auto"
-          >
-            <source src="/BG.mp4" type="video/mp4" />
-            Your browser does not support HTML5 video.
-          </video>
+          />
         </div>
 
         {/* Hero Content */}
