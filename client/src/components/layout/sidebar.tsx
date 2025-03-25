@@ -74,77 +74,87 @@ export default function Sidebar() {
         <FaBars className="h-5 w-5" />
       </Button>
       
-      {/* Mobile Full Screen Menu */}
+      {/* Mobile Full Screen Menu with Spiral Animation */}
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <motion.div 
-            className="fixed inset-0 bg-background z-50 lg:hidden overflow-hidden"
-            initial={{ x: "-100%" }}
-            animate={{ x: 0 }}
-            exit={{ x: "-100%" }}
-            transition={{ type: "tween", duration: 0.3, ease: "easeInOut" }}
-          >
-            <div className="flex flex-col h-full">
-              {/* Mobile Menu Header */}
-              <div className="flex justify-between items-center p-5 border-b border-border/20">
-                <Link href="/" className="flex items-center space-x-3" onClick={handleMobileLinkClick}>
-                  <FaCube className="text-primary text-2xl" />
-                  <h1 className="text-2xl font-heading font-bold">ShadowVault</h1>
-                </Link>
-                <Button 
-                  onClick={toggleMobileMenu}
-                  variant="ghost" 
-                  className="p-2 rounded-full hover:bg-accent/10"
-                  aria-label="Close mobile menu"
-                >
-                  <FaTimes className="h-6 w-6" />
-                </Button>
-              </div>
-              
-              {/* Mobile Menu Navigation */}
-              <nav className="flex-1 overflow-y-auto p-6">
-                <div className="space-y-5">
-                  {navItems.map((item) => (
-                    <Link 
-                      key={item.path} 
-                      href={item.path}
-                      onClick={handleMobileLinkClick}
-                      className={cn(
-                        "flex items-center space-x-4 p-4 rounded-lg transition-all text-lg",
-                        location === item.path 
-                          ? "bg-primary/20 text-primary font-medium" 
-                          : "text-foreground hover:bg-primary/10"
-                      )}
-                    >
-                      <span className="text-primary/80">{item.icon}</span>
-                      <span>{item.name}</span>
-                    </Link>
-                  ))}
+          <>
+            {/* Background Overlay */}
+            <motion.div 
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              onClick={toggleMobileMenu}
+            />
+            
+            {/* Menu Container with Spiral Animation */}
+            <motion.div 
+              className="fixed top-0 left-0 w-full h-full bg-background z-50 lg:hidden overflow-hidden"
+              initial={{ 
+                clipPath: "circle(0% at 2rem 2rem)",
+                opacity: 0
+              }}
+              animate={{ 
+                clipPath: "circle(150% at 2rem 2rem)",
+                opacity: 1
+              }}
+              exit={{ 
+                clipPath: "circle(0% at 2rem 2rem)",
+                opacity: 0
+              }}
+              transition={{ 
+                type: "spring", 
+                damping: 20,
+                stiffness: 150,
+                duration: 0.5
+              }}
+            >
+              <div className="flex flex-col h-full">
+                {/* Simplified Mobile Menu Header */}
+                <div className="flex justify-between items-center p-4">
+                  <h1 className="text-xl font-heading font-bold">Menu</h1>
+                  <Button 
+                    onClick={toggleMobileMenu}
+                    variant="ghost" 
+                    size="icon"
+                    className="rounded-full hover:bg-accent/10"
+                    aria-label="Close menu"
+                  >
+                    <FaTimes className="h-5 w-5" />
+                  </Button>
                 </div>
                 
-                {/* Mobile Menu Footer */}
-                <div className="mt-auto pt-6 border-t border-border/20 space-y-4">
-                  <Link 
-                    href="#login" 
-                    onClick={handleMobileLinkClick}
-                    className="flex items-center justify-center w-full space-x-3 p-4 rounded-lg text-primary-foreground bg-primary hover:bg-primary/90 transition-colors"
-                  >
-                    <FaSignInAlt className="w-5 h-5" />
-                    <span className="font-medium">Login</span>
-                  </Link>
-                  
-                  <Link 
-                    href="#cart" 
-                    onClick={handleMobileLinkClick}
-                    className="flex items-center justify-center w-full space-x-3 p-4 rounded-lg border border-primary/50 text-primary hover:bg-primary/10 transition-colors"
-                  >
-                    <FaShoppingCart className="w-5 h-5" />
-                    <span className="font-medium">View Cart</span>
-                  </Link>
-                </div>
-              </nav>
-            </div>
-          </motion.div>
+                {/* Simplified Navigation */}
+                <nav className="flex-1 p-4">
+                  <div className="space-y-2">
+                    {navItems.map((item, index) => (
+                      <motion.div
+                        key={item.path}
+                        initial={{ x: -20, opacity: 0 }}
+                        animate={{ x: 0, opacity: 1 }}
+                        transition={{ delay: index * 0.05 }}
+                      >
+                        <Link 
+                          href={item.path}
+                          onClick={handleMobileLinkClick}
+                          className={cn(
+                            "flex items-center space-x-3 p-3 rounded-lg",
+                            location === item.path 
+                              ? "text-primary font-medium" 
+                              : "text-foreground"
+                          )}
+                        >
+                          <span>{item.icon}</span>
+                          <span>{item.name}</span>
+                        </Link>
+                      </motion.div>
+                    ))}
+                  </div>
+                </nav>
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
       
