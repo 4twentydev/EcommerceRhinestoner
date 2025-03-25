@@ -64,7 +64,7 @@ export default function Sidebar() {
 
   return (
     <>
-      {/* Mobile Menu Toggle Button */}
+      {/* Menu Toggle Button */}
       <Button 
         onClick={toggleMobileMenu}
         variant="ghost" 
@@ -73,6 +73,13 @@ export default function Sidebar() {
       >
         <FaBars className="h-5 w-5" />
       </Button>
+
+      {/* Desktop Cube Icon */}
+      <div className="hidden lg:block fixed top-4 left-4 z-50">
+        <div className="p-2 bg-background/80 backdrop-blur-sm rounded-full text-primary shadow-md transition-all duration-200">
+          <FaCube className="h-5 w-5" />
+        </div>
+      </div>
       
       {/* Mobile Full Screen Menu with Spiral Animation */}
       <AnimatePresence>
