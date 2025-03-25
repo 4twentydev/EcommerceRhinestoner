@@ -140,17 +140,18 @@ export default function Home() {
   return (
     <div className="h-screen overflow-y-auto overflow-x-hidden snap-y snap-mandatory">
       <Section id="hero" className="relative overflow-hidden">
-        {/* Simple Background with Dark Overlay */}
+        {/* Video Background with Dark Overlay */}
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-black/60 z-10"></div>
-          <div 
-            className="w-full h-full bg-gradient-to-r from-primary/50 to-background/90"
-            style={{
-              backgroundImage: "url('/images/product1.jpg')",
-              backgroundSize: "cover",
-              backgroundPosition: "center"
-            }}
-          ></div>
+          <div className="absolute inset-0 bg-black/50 z-10"></div>
+          <video 
+            className="absolute inset-0 w-full h-full object-cover" 
+            autoPlay 
+            muted 
+            loop 
+            playsInline
+          >
+            <source src="/BG.mp4" type="video/mp4" />
+          </video>
         </div>
 
         {/* Hero Content */}
