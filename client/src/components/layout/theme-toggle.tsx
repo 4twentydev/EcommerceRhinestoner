@@ -12,15 +12,14 @@ export default function ThemeToggle() {
       size="icon"
       onClick={() => {
         const newTheme = theme === "dark" ? "light" : "dark";
-        console.log(`Switching theme from ${theme} to ${newTheme}`);
         setTheme(newTheme);
       }}
-      className="fixed top-4 right-20 z-[60] h-8 w-8 rounded-full bg-background/80 backdrop-blur-sm hover:bg-accent transition-all duration-200"
+      className="fixed bottom-4 right-4 z-[60] h-10 w-10 rounded-full bg-background/80 backdrop-blur-sm hover:bg-accent transition-all duration-200 shadow-md border"
     >
       {theme === "dark" ? (
-        <Sun className="h-4 w-4 text-yellow-500" />
+        <Sun className="h-5 w-5 text-yellow-500" />
       ) : (
-        <Moon className="h-4 w-4 text-blue-700" />
+        <Moon className="h-5 w-5 text-blue-700" />
       )}
       <span className="sr-only">Toggle theme</span>
     </Button>

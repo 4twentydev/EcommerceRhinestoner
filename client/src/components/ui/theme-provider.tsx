@@ -14,7 +14,7 @@ type ThemeProviderState = {
 };
 
 const initialState: ThemeProviderState = {
-  theme: "system",
+  theme: "dark",
   setTheme: () => null,
 };
 
@@ -22,23 +22,18 @@ const ThemeProviderContext = createContext<ThemeProviderState>(initialState);
 
 export function ThemeProvider({
   children,
-  defaultTheme = "system",
-  storageKey = "ui-theme",
+  defaultTheme = "dark", // Dark mode as default
+  storageKey = "theme-mode",
   ...props
 }: ThemeProviderProps) {
-  const [theme, setTheme] = useState<Theme>(() => {
-    // For debugging, let's see what's in localStorage
-    const savedTheme = localStorage.getItem(storageKey) as Theme;
-    console.log(`Initial theme from localStorage: ${savedTheme || 'not set'}`);
-    console.log(`Default theme: ${defaultTheme}`);
-    
-    return savedTheme || defaultTheme;
-  });
+  // Initialize with dark theme by default
+  const [theme, setTheme] = useState<Theme>(
+    () => (localStorage.getItem(storageKey) as Theme) || defaultTheme
+  );
 
+  // Apply the theme class to the document element
   useEffect(() => {
     const root = window.document.documentElement;
-    
-    // Remove both classes first
     root.classList.remove("light", "dark");
 
     if (theme === "system") {
@@ -48,16 +43,12 @@ export function ThemeProvider({
         : "light";
 
       root.classList.add(systemTheme);
-      return;
+    } else {
+      root.classList.add(theme);
     }
-
-    // Add the appropriate class
-    root.classList.add(theme);
-    
-    // This is for debugging
-    console.log(`Theme set to: ${theme}`);
   }, [theme]);
 
+  // Create the context value
   const value = {
     theme,
     setTheme: (theme: Theme) => {
@@ -73,6 +64,7 @@ export function ThemeProvider({
   );
 }
 
+// Hook to use the theme context
 export const useTheme = () => {
   const context = useContext(ThemeProviderContext);
 
