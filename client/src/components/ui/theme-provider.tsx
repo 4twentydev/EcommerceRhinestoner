@@ -23,7 +23,7 @@ const ThemeProviderContext = createContext<ThemeProviderState>(initialState);
 export function ThemeProvider({
   children,
   defaultTheme = "dark", // Dark mode as default
-  storageKey = "theme-mode",
+  storageKey = "ecommerce-theme",
   ...props
 }: ThemeProviderProps) {
   // Initialize with dark theme by default
@@ -43,17 +43,41 @@ export function ThemeProvider({
         : "light";
 
       root.classList.add(systemTheme);
+      document.body.setAttribute("data-theme", systemTheme);
     } else {
       root.classList.add(theme);
+      document.body.setAttribute("data-theme", theme);
+    }
+    
+    // Debug information to console
+    console.log(`Theme changed to: ${theme}`);
+  }, [theme]);
+
+  // Add a listener for system theme changes
+  useEffect(() => {
+    if (theme === "system") {
+      const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+      
+      const handleChange = () => {
+        const root = window.document.documentElement;
+        const systemTheme = mediaQuery.matches ? "dark" : "light";
+        
+        root.classList.remove("light", "dark");
+        root.classList.add(systemTheme);
+        document.body.setAttribute("data-theme", systemTheme);
+      };
+      
+      mediaQuery.addEventListener("change", handleChange);
+      return () => mediaQuery.removeEventListener("change", handleChange);
     }
   }, [theme]);
 
   // Create the context value
   const value = {
     theme,
-    setTheme: (theme: Theme) => {
-      localStorage.setItem(storageKey, theme);
-      setTheme(theme);
+    setTheme: (newTheme: Theme) => {
+      localStorage.setItem(storageKey, newTheme);
+      setTheme(newTheme);
     },
   };
 
