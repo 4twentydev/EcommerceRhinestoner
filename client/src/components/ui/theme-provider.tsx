@@ -26,9 +26,14 @@ export function ThemeProvider({
   storageKey = "ui-theme",
   ...props
 }: ThemeProviderProps) {
-  const [theme, setTheme] = useState<Theme>(
-    () => (localStorage.getItem(storageKey) as Theme) || defaultTheme
-  );
+  const [theme, setTheme] = useState<Theme>(() => {
+    // For debugging, let's see what's in localStorage
+    const savedTheme = localStorage.getItem(storageKey) as Theme;
+    console.log(`Initial theme from localStorage: ${savedTheme || 'not set'}`);
+    console.log(`Default theme: ${defaultTheme}`);
+    
+    return savedTheme || defaultTheme;
+  });
 
   useEffect(() => {
     const root = window.document.documentElement;
