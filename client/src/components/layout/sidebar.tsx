@@ -24,7 +24,7 @@ const navItems = [
 
 export default function Sidebar() {
   const [location] = useLocation();
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false); // Collapsed by default
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -64,7 +64,7 @@ export default function Sidebar() {
 
   return (
     <>
-      {/* Menu Toggle Button */}
+      {/* Mobile Menu Toggle Button */}
       <Button 
         onClick={toggleMobileMenu}
         variant="ghost" 
@@ -74,12 +74,15 @@ export default function Sidebar() {
         <FaBars className="h-5 w-5" />
       </Button>
 
-      {/* Desktop Cube Icon */}
-      <div className="hidden lg:block fixed top-4 left-4 z-50">
-        <div className="p-2 bg-background/80 backdrop-blur-sm rounded-full text-primary shadow-md transition-all duration-200">
-          <FaCube className="h-5 w-5" />
-        </div>
-      </div>
+      {/* Desktop Cube Icon - Used to toggle sidebar */}
+      <Button
+        onClick={toggleSidebar}
+        variant="ghost"
+        className="hidden lg:flex fixed top-4 left-4 z-50 p-2 bg-background/80 backdrop-blur-sm rounded-full text-primary shadow-md hover:bg-primary/10 transition-all duration-200"
+        aria-label="Toggle sidebar"
+      >
+        <FaCube className="h-5 w-5" />
+      </Button>
       
       {/* Mobile Full Screen Menu with Spiral Animation */}
       <AnimatePresence>
@@ -168,14 +171,6 @@ export default function Sidebar() {
       {/* Desktop Sidebar - Only visible on large screens */}
       {!isMobile && (
         <div className="fixed top-0 left-0 h-full z-40 hidden lg:flex">
-          {/* Desktop Sidebar Toggle Button */}
-          <Button 
-            onClick={toggleSidebar}
-            variant="ghost" 
-            className="fixed top-4 left-4 ml-12 z-50 p-2 text-foreground bg-background/80 backdrop-blur-sm rounded-full hover:bg-accent/10 transition-colors duration-200"
-          >
-            {isExpanded ? <FaTimes className="h-4 w-4" /> : <FaBars className="h-4 w-4" />}
-          </Button>
 
           {/* Desktop Sidebar Content */}
           <motion.div 
