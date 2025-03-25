@@ -28,13 +28,13 @@ export const products: Product[] = [
       "A stunning rainbow crystal-encrusted lighter that adds a colorful sparkle to your everyday carry. Each crystal is hand-placed for maximum brilliance.",
     price: 39.99,
     formattedPrice: "$39.99",
-    image: "/images/products/Untitled (9) 6.jpg",
+    image: "/images/products/lighter-rainbow.jpg",
     category: "Accessories",
     isNew: true,
     colors: ["rainbow", "iridescent"],
     sizes: ["One Size"],
     images: [
-      "/images/products/Untitled (9) 6.jpg"
+      "/images/products/lighter-rainbow.jpg"
     ],
     stock: 15,
   },
@@ -45,13 +45,13 @@ export const products: Product[] = [
       "Make a statement with this vibrant lime green crystal lighter. The holographic effect creates an eye-catching display in any lighting.",
     price: 44.99,
     formattedPrice: "$44.99",
-    image: "/images/products/Untitled (9) 3.jpg",
+    image: "/images/products/lighter-green.jpg",
     category: "Accessories",
     isNew: true,
     colors: ["green", "holographic"],
     sizes: ["One Size"],
     images: [
-      "/images/products/Untitled (9) 3.jpg"
+      "/images/products/lighter-green.jpg"
     ],
     stock: 12,
   },
@@ -62,13 +62,13 @@ export const products: Product[] = [
       "Elegance meets functionality with this rose gold crystal lighter. Perfect for those who appreciate luxury in the details.",
     price: 49.99,
     formattedPrice: "$49.99",
-    image: "/images/products/Untitled (9) 8.jpg",
+    image: "/images/products/lighter-rosegold.jpg",
     category: "Accessories",
     isNew: true,
     colors: ["rose gold"],
     sizes: ["One Size"],
     images: [
-      "/images/products/Untitled (9) 8.jpg"
+      "/images/products/lighter-rosegold.jpg"
     ],
     stock: 10,
   },
@@ -79,13 +79,13 @@ export const products: Product[] = [
       "This turquoise crystal lighter features a beautiful pattern with silver hearts. A perfect gift for someone special or a treat for yourself.",
     price: 42.99,
     formattedPrice: "$42.99",
-    image: "/images/products/Untitled (9) 5.jpg",
+    image: "/images/products/lighter-turquoise.jpg",
     category: "Accessories",
     isNew: false,
     colors: ["turquoise", "silver"],
     sizes: ["One Size"],
     images: [
-      "/images/products/Untitled (9) 5.jpg"
+      "/images/products/lighter-turquoise.jpg"
     ],
     stock: 18,
   },
@@ -96,13 +96,13 @@ export const products: Product[] = [
       "A delightful lighter adorned with cheerful yellow daisies on a pearl white background. Brings a touch of spring to your everyday life.",
     price: 54.99,
     formattedPrice: "$54.99",
-    image: "/images/products/Untitled_Artwork.png",
+    image: "/images/products/lighter-daisy.png",
     category: "Accessories",
     isNew: true,
     colors: ["white", "yellow"],
     sizes: ["One Size"],
     images: [
-      "/images/products/Untitled_Artwork.png"
+      "/images/products/lighter-daisy.png"
     ],
     stock: 8,
   },
@@ -113,13 +113,13 @@ export const products: Product[] = [
       "Sophisticated and sleek, this black diamond crystal lighter exudes modern luxury and fits perfectly in any style.",
     price: 46.99,
     formattedPrice: "$46.99",
-    image: "/images/products/Untitled (9) 2.jpg",
+    image: "/images/products/lighter-black.jpg",
     category: "Accessories",
     isNew: false,
     colors: ["black"],
     sizes: ["One Size"],
     images: [
-      "/images/products/Untitled (9) 2.jpg"
+      "/images/products/lighter-black.jpg"
     ],
     stock: 20,
   },
@@ -130,13 +130,13 @@ export const products: Product[] = [
       "Transport yourself to another galaxy with this cosmic blue crystal lighter featuring embedded smiley faces and moons.",
     price: 45.99,
     formattedPrice: "$45.99",
-    image: "/images/products/Untitled (9) 7.jpg",
+    image: "/images/products/lighter-cosmic.jpg",
     category: "Accessories",
     isNew: true,
     colors: ["blue", "purple", "iridescent"],
     sizes: ["One Size"],
     images: [
-      "/images/products/Untitled (9) 7.jpg"
+      "/images/products/lighter-cosmic.jpg"
     ],
     stock: 14,
   },
@@ -147,13 +147,13 @@ export const products: Product[] = [
       "A passionate red crystal lighter adorned with elegant diamond heart details. Perfect for making a bold statement.",
     price: 52.99,
     formattedPrice: "$52.99",
-    image: "/images/products/Untitled (9) 4.jpg",
+    image: "/images/products/lighter-ruby.jpg",
     category: "Accessories",
     isNew: false,
     colors: ["red", "silver"],
     sizes: ["One Size"],
     images: [
-      "/images/products/Untitled (9) 4.jpg"
+      "/images/products/lighter-ruby.jpg"
     ],
     stock: 9,
   },
@@ -164,13 +164,13 @@ export const products: Product[] = [
       "Capture the essence of the ocean with this brilliant blue crystal lighter that shimmers like water in the sunlight.",
     price: 43.99,
     formattedPrice: "$43.99",
-    image: "/images/products/Untitled (9).jpg",
+    image: "/images/products/lighter-ocean.jpg",
     category: "Accessories",
     isNew: false,
     colors: ["blue", "iridescent"],
     sizes: ["One Size"],
     images: [
-      "/images/products/Untitled (9).jpg"
+      "/images/products/lighter-ocean.jpg"
     ],
     stock: 16,
   }
