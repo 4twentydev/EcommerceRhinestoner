@@ -8,12 +8,12 @@ import Products from "@/pages/products";
 import Contact from "@/pages/contact";
 import Checkout from "@/pages/checkout";
 import Sidebar from "@/components/layout/sidebar";
-import CartPanel from "@/components/layout/cart-panel";
 import ThemeToggle from "@/components/layout/theme-toggle";
 import SocialLinks from "@/components/layout/social-links";
 import Footer from "@/components/layout/footer";
 import NotFound from "@/pages/not-found";
 import { CartProvider } from "@/context/cart-context";
+import CartPanel from "@/components/layout/cart-panel";
 
 function Router() {
   return (
@@ -30,21 +30,17 @@ function Router() {
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <CartProvider>
-        <div className="bg-dark text-light overflow-x-hidden">
-          <ThemeToggle />
-          <Sidebar />
-          <CartPanel />
-          <SocialLinks />
-          <main className="w-full">
-            <Router />
-            <Footer />
-          </main>
-        </div>
-        <Toaster />
-      </CartProvider>
-    </QueryClientProvider>
+    <div className="bg-background text-foreground overflow-x-hidden">
+      <ThemeToggle />
+      <Sidebar />
+      <CartPanel />
+      <SocialLinks />
+      <main className="w-full">
+        <Router />
+        <Footer />
+      </main>
+      <Toaster />
+    </div>
   );
 }
 
