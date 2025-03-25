@@ -1,10 +1,97 @@
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
-import { FaChevronDown } from "react-icons/fa";
+import { FaChevronDown, FaChevronRight, FaStar, FaTimes } from "react-icons/fa";
 import Section from "@/components/layout/section";
+import ProductCard from "@/components/products/product-card";
+import { products, featuredProducts, Product } from "@/lib/utils";
+import { useState } from "react";
+
+// Simplified Product Modal that doesn't depend on cart context
+function SimpleProductModal({ 
+  product, 
+  isOpen, 
+  onClose 
+}: { 
+  product: Product | null; 
+  isOpen: boolean; 
+  onClose: () => void;
+}) {
+  if (!product || !isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center">
+      <div className="absolute inset-0 bg-dark/80 backdrop-blur-sm" onClick={onClose}></div>
+      
+      <div className="relative bg-dark border border-muted/20 rounded-lg shadow-2xl w-full max-w-5xl mx-4 overflow-hidden">
+        <Button 
+          variant="ghost" 
+          size="icon" 
+          onClick={onClose}
+          className="absolute top-4 right-4 z-10 w-8 h-8 flex items-center justify-center rounded-full bg-dark/60 text-light hover:bg-primary hover:text-dark transition-colors"
+        >
+          <FaTimes />
+        </Button>
+        
+        <div className="flex flex-col md:flex-row">
+          {/* Product Image */}
+          <div className="w-full md:w-1/2 h-80 md:h-auto">
+            <img 
+              src={product.image} 
+              className="h-full w-full object-cover" 
+              alt={product.title}
+            />
+          </div>
+          
+          {/* Product Details */}
+          <div className="w-full md:w-1/2 p-6 md:p-8">
+            {product.isNew && (
+              <span className="inline-block bg-secondary/20 text-secondary text-xs font-semibold px-2 py-1 rounded">
+                NEW ARRIVAL
+              </span>
+            )}
+            <h2 className="font-heading text-2xl md:text-3xl mt-2">{product.title}</h2>
+            
+            <div className="mb-6 mt-4">
+              <h3 className="font-heading text-3xl font-semibold">{product.formattedPrice}</h3>
+              <p className="text-light/60 text-sm">Free shipping on orders over $100</p>
+            </div>
+            
+            <p className="text-light/80 mb-6">
+              {product.description}
+            </p>
+            
+            <div className="flex gap-4">
+              <Button 
+                variant="outline"
+                className="flex-1 py-3 rounded-lg border border-primary text-primary font-medium hover:bg-primary/10 transition-all duration-300"
+              >
+                View Details
+              </Button>
+              <Link href="/products">
+                <Button 
+                  className="flex-1 py-3 rounded-lg bg-primary text-dark font-medium hover:bg-primary/90 transition-colors"
+                >
+                  See All Products
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function Home() {
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  
+  // Show only 4 products on home page
+  const limitedProducts = products.slice(0, 4);
+  // Show only 3 featured products
+  const limitedFeaturedProducts = featuredProducts.slice(0, 3);
+  
   return (
     <div className="h-screen overflow-y-auto overflow-x-hidden snap-y snap-mandatory">
       <Section id="hero" className="relative overflow-hidden">
@@ -46,7 +133,7 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.6 }}
           >
             <Link href="/new-arrivals">
-              <Button className="px-8 py-3 bg-primary text-dark font-medium rounded-full hover:bg-primary/90 transition-colors">
+              <Button className="px-8 py-3 bg-primary text-primary-foreground font-medium rounded-full hover:bg-primary/90 transition-colors">
                 Explore New Arrivals
               </Button>
             </Link>
@@ -66,7 +153,7 @@ export default function Home() {
           transition={{ delay: 1, duration: 0.5 }}
         >
           <motion.a 
-            href="#about"
+            href="#new-arrivals"
             animate={{ y: [0, 10, 0] }}
             transition={{ repeat: Infinity, duration: 1.5 }}
           >
@@ -75,8 +162,122 @@ export default function Home() {
         </motion.div>
       </Section>
       
+      {/* New Arrivals Section */}
+      <Section id="new-arrivals" className="bg-background">
+        <div className="container mx-auto px-6 py-16">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true, amount: 0.3 }}
+            className="mb-12"
+          >
+            <div className="flex items-center justify-between">
+              <h2 className="text-3xl md:text-4xl font-heading flex items-center">
+                <FaStar className="text-primary mr-2" /> New Arrivals
+              </h2>
+              <Link href="/new-arrivals">
+                <Button variant="ghost" className="flex items-center gap-2 text-primary hover:bg-primary/10">
+                  View All <FaChevronRight className="h-3 w-3" />
+                </Button>
+              </Link>
+            </div>
+          </motion.div>
+          
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-3 gap-6"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, staggerChildren: 0.1 }}
+            viewport={{ once: true, amount: 0.3 }}
+          >
+            {limitedFeaturedProducts.map((product) => (
+              <motion.div 
+                key={product.id}
+                whileHover={{ y: -5 }}
+                transition={{ duration: 0.2 }}
+                className="bg-primary/5 border border-border/40 rounded-lg overflow-hidden group"
+              >
+                <div className="h-64 overflow-hidden relative">
+                  <div className="absolute top-2 right-2 z-10 bg-primary text-primary-foreground text-xs font-bold px-2 py-1 rounded">
+                    NEW
+                  </div>
+                  <img 
+                    src={product.image} 
+                    alt={product.title} 
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                </div>
+                <div className="p-4">
+                  <h3 className="font-heading text-xl">{product.title}</h3>
+                  <p className="text-muted-foreground text-sm line-clamp-2 mt-1 mb-3">
+                    {product.description}
+                  </p>
+                  <div className="flex justify-between items-center">
+                    <span className="font-heading text-lg font-medium">{product.formattedPrice}</span>
+                    <Button 
+                      onClick={() => {
+                        setSelectedProduct(product);
+                        setIsModalOpen(true);
+                      }}
+                      variant="outline" 
+                      className="border-primary text-primary hover:bg-primary hover:text-primary-foreground text-sm"
+                      size="sm"
+                    >
+                      View Details
+                    </Button>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </Section>
+      
+      {/* Featured Products Section */}
+      <Section id="products" className="bg-muted/30">
+        <div className="container mx-auto px-6 py-16">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true, amount: 0.3 }}
+            className="mb-12"
+          >
+            <div className="flex items-center justify-between">
+              <h2 className="text-3xl md:text-4xl font-heading">Featured Products</h2>
+              <Link href="/products">
+                <Button variant="ghost" className="flex items-center gap-2 text-primary hover:bg-primary/10">
+                  View All <FaChevronRight className="h-3 w-3" />
+                </Button>
+              </Link>
+            </div>
+          </motion.div>
+          
+          <motion.div 
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true, amount: 0.3 }}
+          >
+            {limitedProducts.map((product) => (
+              <ProductCard 
+                key={product.id} 
+                product={product} 
+                onQuickView={() => {
+                  setSelectedProduct(product);
+                  setIsModalOpen(true);
+                }} 
+              />
+            ))}
+          </motion.div>
+        </div>
+      </Section>
+      
+      {/* About Section */}
       <Section id="about" className="bg-background">
-        <div className="container mx-auto px-6">
+        <div className="container mx-auto px-6 py-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -89,9 +290,19 @@ export default function Home() {
               We curate timeless pieces that blend modern aesthetics with enduring quality. 
               Each product is thoughtfully designed to elevate your everyday experience.
             </p>
+            <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+              Learn More About Us
+            </Button>
           </motion.div>
         </div>
       </Section>
+      
+      {/* Simple Product Detail Modal that doesn't use cart context */}
+      <SimpleProductModal 
+        product={selectedProduct} 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+      />
     </div>
   );
 }
