@@ -143,11 +143,11 @@ export default function Home() {
         {/* Video Background with Dark Overlay */}
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-black/50 z-10"></div>
-          <video 
-            className="absolute inset-0 w-full h-full object-cover" 
-            autoPlay 
-            muted 
-            loop 
+          <video
+            className="absolute inset-0 w-full h-full object-cover"
+            autoPlay
+            muted
+            loop
             playsInline
           >
             <source src="/BG.mp4" type="video/mp4" />
