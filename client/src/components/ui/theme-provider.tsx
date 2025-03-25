@@ -34,23 +34,17 @@ export function ThemeProvider({
   // Apply the theme class to the document element
   useEffect(() => {
     const root = window.document.documentElement;
-    root.classList.remove("light", "dark");
-
+    
     if (theme === "system") {
-      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)")
-        .matches
-        ? "dark"
-        : "light";
-
+      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      root.classList.remove("light", "dark");
       root.classList.add(systemTheme);
-      document.body.setAttribute("data-theme", systemTheme);
     } else {
+      root.classList.remove("light", "dark");
       root.classList.add(theme);
-      document.body.setAttribute("data-theme", theme);
     }
     
-    // Debug information to console
-    console.log(`Theme changed to: ${theme}`);
+    localStorage.setItem(storageKey, theme);
   }, [theme]);
 
   // Add a listener for system theme changes
