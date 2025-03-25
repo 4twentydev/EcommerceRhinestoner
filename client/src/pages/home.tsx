@@ -11,41 +11,44 @@ import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
 
 // Simplified Product Modal that doesn't depend on cart context
-function SimpleProductModal({ 
-  product, 
-  isOpen, 
-  onClose 
-}: { 
-  product: Product | null; 
-  isOpen: boolean; 
+function SimpleProductModal({
+  product,
+  isOpen,
+  onClose,
+}: {
+  product: Product | null;
+  isOpen: boolean;
   onClose: () => void;
 }) {
   if (!product || !isOpen) return null;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
-      <div className="absolute inset-0 bg-dark/80 backdrop-blur-sm" onClick={onClose}></div>
-      
+      <div
+        className="absolute inset-0 bg-dark/80 backdrop-blur-sm"
+        onClick={onClose}
+      ></div>
+
       <div className="relative bg-dark border border-muted/20 rounded-lg shadow-2xl w-full max-w-5xl mx-4 overflow-hidden">
-        <Button 
-          variant="ghost" 
-          size="icon" 
+        <Button
+          variant="ghost"
+          size="icon"
           onClick={onClose}
           className="absolute top-4 right-4 z-10 w-8 h-8 flex items-center justify-center rounded-full bg-dark/60 text-light hover:bg-primary hover:text-dark transition-colors"
         >
           <FaTimes />
         </Button>
-        
+
         <div className="flex flex-col md:flex-row">
           {/* Product Image */}
           <div className="w-full md:w-1/2 h-80 md:h-auto">
-            <img 
-              src={product.image} 
-              className="h-full w-full object-cover" 
+            <img
+              src={product.image}
+              className="h-full w-full object-cover"
               alt={product.title}
             />
           </div>
-          
+
           {/* Product Details */}
           <div className="w-full md:w-1/2 p-6 md:p-8">
             {product.isNew && (
@@ -53,28 +56,30 @@ function SimpleProductModal({
                 NEW ARRIVAL
               </span>
             )}
-            <h2 className="font-heading text-2xl md:text-3xl mt-2">{product.title}</h2>
-            
+            <h2 className="font-heading text-2xl md:text-3xl mt-2">
+              {product.title}
+            </h2>
+
             <div className="mb-6 mt-4">
-              <h3 className="font-heading text-3xl font-semibold">{product.formattedPrice}</h3>
-              <p className="text-light/60 text-sm">Free shipping on orders over $100</p>
+              <h3 className="font-heading text-3xl font-semibold">
+                {product.formattedPrice}
+              </h3>
+              <p className="text-light/60 text-sm">
+                Free shipping on orders over $100
+              </p>
             </div>
-            
-            <p className="text-light/80 mb-6">
-              {product.description}
-            </p>
-            
+
+            <p className="text-light/80 mb-6">{product.description}</p>
+
             <div className="flex gap-4">
-              <Button 
+              <Button
                 variant="outline"
                 className="flex-1 py-3 rounded-lg border border-primary text-primary font-medium hover:bg-primary/10 transition-all duration-300"
               >
                 View Details
               </Button>
               <Link href="/products">
-                <Button 
-                  className="flex-1 py-3 rounded-lg bg-primary text-dark font-medium hover:bg-primary/90 transition-colors"
-                >
+                <Button className="flex-1 py-3 rounded-lg bg-primary text-dark font-medium hover:bg-primary/90 transition-colors">
                   See All Products
                 </Button>
               </Link>
@@ -90,7 +95,7 @@ export default function Home() {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { toast } = useToast();
-  
+
   // Handle cart functionality safely
   let cartFunctions = { addToCart: (cartItem: any) => {} };
   try {
@@ -98,21 +103,26 @@ export default function Home() {
   } catch (error) {
     console.warn("Cart context not available in Home:", error);
   }
-  
+
   // Show only 4 products on home page
   const limitedProducts = products.slice(0, 4);
   // Show only 3 featured products
   const limitedFeaturedProducts = featuredProducts.slice(0, 3);
-  
-  const handleAddToCart = (product: Product, quantity: number, size?: string, color?: string) => {
+
+  const handleAddToCart = (
+    product: Product,
+    quantity: number,
+    size?: string,
+    color?: string,
+  ) => {
     try {
       cartFunctions.addToCart({
         product,
         quantity,
         size,
-        color
+        color,
       });
-      
+
       toast({
         title: "Added to cart",
         description: `${product.title} has been added to your cart.`,
@@ -122,41 +132,47 @@ export default function Home() {
       toast({
         title: "Error",
         description: "There was a problem adding this item to your cart.",
-        variant: "destructive"
+        variant: "destructive",
       });
     }
   };
-  
+
   return (
     <div className="h-screen overflow-y-auto overflow-x-hidden snap-y snap-mandatory">
       <Section id="hero" className="relative overflow-hidden">
         {/* Video Background with Dark Overlay */}
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-black/40 z-10"></div>
-          {/* Using regular img as fallback */}
-          <img
-            src="/BG.svg" 
-            alt="Hero Background"
-            className="w-full h-full object-cover"
-          />
+          <video 
+            className="w-full h-full object-cover" 
+            autoPlay 
+            loop 
+            muted 
+            playsInline
+            preload="auto"
+          >
+            <source src="/BG.mp4" type="video/mp4" />
+            Your browser does not support HTML5 video.
+          </video>
         </div>
-        
+
         {/* Hero Content */}
-        <motion.div 
+        <motion.div
           className="relative z-20 text-center px-6"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <motion.h1 
+          <motion.h1
             className="font-heading font-light text-4xl md:text-6xl lg:text-7xl mb-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            Discover <span className="text-primary font-semibold">Modern</span> Essentials
+            Discover <span className="text-primary font-semibold">Modern</span>{" "}
+            Essentials
           </motion.h1>
-          <motion.h4 
+          <motion.h4
             className="font-sans text-lg md:text-xl text-light/80 max-w-2xl mx-auto mb-10"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -164,7 +180,7 @@ export default function Home() {
           >
             Curated collections designed for the contemporary lifestyle
           </motion.h4>
-          <motion.div 
+          <motion.div
             className="flex flex-col sm:flex-row gap-4 justify-center"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -176,21 +192,24 @@ export default function Home() {
               </Button>
             </Link>
             <Link href="/products">
-              <Button variant="outline" className="px-8 py-3 bg-transparent border border-light text-light font-medium rounded-full hover:bg-light/10 transition-colors">
+              <Button
+                variant="outline"
+                className="px-8 py-3 bg-transparent border border-light text-light font-medium rounded-full hover:bg-light/10 transition-colors"
+              >
                 Browse All Products
               </Button>
             </Link>
           </motion.div>
         </motion.div>
-        
+
         {/* Scroll Indicator */}
-        <motion.div 
+        <motion.div
           className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1, duration: 0.5 }}
         >
-          <motion.a 
+          <motion.a
             href="#new-arrivals"
             animate={{ y: [0, 10, 0] }}
             transition={{ repeat: Infinity, duration: 1.5 }}
@@ -199,7 +218,7 @@ export default function Home() {
           </motion.a>
         </motion.div>
       </Section>
-      
+
       {/* New Arrivals Section */}
       <Section id="new-arrivals" className="bg-background">
         <div className="container mx-auto px-6 py-16">
@@ -215,14 +234,17 @@ export default function Home() {
                 <FaStar className="text-primary mr-2" /> New Arrivals
               </h2>
               <Link href="/new-arrivals">
-                <Button variant="ghost" className="flex items-center gap-2 text-primary hover:bg-primary/10">
+                <Button
+                  variant="ghost"
+                  className="flex items-center gap-2 text-primary hover:bg-primary/10"
+                >
                   View All <FaChevronRight className="h-3 w-3" />
                 </Button>
               </Link>
             </div>
           </motion.div>
-          
-          <motion.div 
+
+          <motion.div
             className="grid grid-cols-1 md:grid-cols-3 gap-6"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -230,7 +252,7 @@ export default function Home() {
             viewport={{ once: true, amount: 0.3 }}
           >
             {limitedFeaturedProducts.map((product) => (
-              <motion.div 
+              <motion.div
                 key={product.id}
                 whileHover={{ y: -5 }}
                 transition={{ duration: 0.2 }}
@@ -240,9 +262,9 @@ export default function Home() {
                   <div className="absolute top-2 right-2 z-10 bg-primary text-primary-foreground text-xs font-bold px-2 py-1 rounded">
                     NEW
                   </div>
-                  <img 
-                    src={product.image} 
-                    alt={product.title} 
+                  <img
+                    src={product.image}
+                    alt={product.title}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                 </div>
@@ -252,13 +274,15 @@ export default function Home() {
                     {product.description}
                   </p>
                   <div className="flex justify-between items-center">
-                    <span className="font-heading text-lg font-medium">{product.formattedPrice}</span>
-                    <Button 
+                    <span className="font-heading text-lg font-medium">
+                      {product.formattedPrice}
+                    </span>
+                    <Button
                       onClick={() => {
                         setSelectedProduct(product);
                         setIsModalOpen(true);
                       }}
-                      variant="outline" 
+                      variant="outline"
                       className="border-primary text-primary hover:bg-primary hover:text-primary-foreground text-sm"
                       size="sm"
                     >
@@ -271,7 +295,7 @@ export default function Home() {
           </motion.div>
         </div>
       </Section>
-      
+
       {/* Featured Products Section */}
       <Section id="products" className="bg-muted/30">
         <div className="container mx-auto px-6 py-16">
@@ -283,16 +307,21 @@ export default function Home() {
             className="mb-12"
           >
             <div className="flex items-center justify-between">
-              <h2 className="text-3xl md:text-4xl font-heading">Featured Products</h2>
+              <h2 className="text-3xl md:text-4xl font-heading">
+                Featured Products
+              </h2>
               <Link href="/products">
-                <Button variant="ghost" className="flex items-center gap-2 text-primary hover:bg-primary/10">
+                <Button
+                  variant="ghost"
+                  className="flex items-center gap-2 text-primary hover:bg-primary/10"
+                >
                   View All <FaChevronRight className="h-3 w-3" />
                 </Button>
               </Link>
             </div>
           </motion.div>
-          
-          <motion.div 
+
+          <motion.div
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -300,19 +329,19 @@ export default function Home() {
             viewport={{ once: true, amount: 0.3 }}
           >
             {limitedProducts.map((product) => (
-              <ProductCard 
-                key={product.id} 
-                product={product} 
+              <ProductCard
+                key={product.id}
+                product={product}
                 onQuickView={() => {
                   setSelectedProduct(product);
                   setIsModalOpen(true);
-                }} 
+                }}
               />
             ))}
           </motion.div>
         </div>
       </Section>
-      
+
       {/* About Section */}
       <Section id="about" className="bg-background">
         <div className="container mx-auto px-6 py-16">
@@ -323,22 +352,28 @@ export default function Home() {
             viewport={{ once: true, amount: 0.3 }}
             className="text-center"
           >
-            <h2 className="text-3xl md:text-4xl font-heading mb-8">Our Story</h2>
+            <h2 className="text-3xl md:text-4xl font-heading mb-8">
+              Our Story
+            </h2>
             <p className="text-lg text-foreground/80 max-w-3xl mx-auto mb-10">
-              We curate timeless pieces that blend modern aesthetics with enduring quality. 
-              Each product is thoughtfully designed to elevate your everyday experience.
+              We curate timeless pieces that blend modern aesthetics with
+              enduring quality. Each product is thoughtfully designed to elevate
+              your everyday experience.
             </p>
-            <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+            <Button
+              variant="outline"
+              className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+            >
               Learn More About Us
             </Button>
           </motion.div>
         </div>
       </Section>
-      
+
       {/* Get in Touch Section */}
       <Section id="contact" className="relative">
         {/* Background with SVG */}
-        <div 
+        <div
           className="absolute inset-0 bg-no-repeat bg-cover bg-center"
           style={{ backgroundImage: 'url("/BG.svg")' }}
         >
@@ -354,15 +389,20 @@ export default function Home() {
             className="max-w-3xl mx-auto"
           >
             <div className="bg-background/90 backdrop-blur-sm p-8 rounded-lg shadow-lg">
-              <h2 className="text-3xl md:text-4xl font-heading mb-6 text-center">Get in Touch</h2>
+              <h2 className="text-3xl md:text-4xl font-heading mb-6 text-center">
+                Get in Touch
+              </h2>
               <p className="text-foreground/80 text-center mb-8">
-                Have questions about our products or need assistance with your order? 
-                We're here to help.
+                Have questions about our products or need assistance with your
+                order? We're here to help.
               </p>
               <form className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label htmlFor="name" className="block text-sm font-medium mb-2">
+                    <label
+                      htmlFor="name"
+                      className="block text-sm font-medium mb-2"
+                    >
                       Name
                     </label>
                     <input
@@ -373,7 +413,10 @@ export default function Home() {
                     />
                   </div>
                   <div>
-                    <label htmlFor="email" className="block text-sm font-medium mb-2">
+                    <label
+                      htmlFor="email"
+                      className="block text-sm font-medium mb-2"
+                    >
                       Email
                     </label>
                     <input
@@ -385,7 +428,10 @@ export default function Home() {
                   </div>
                 </div>
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium mb-2">
+                  <label
+                    htmlFor="message"
+                    className="block text-sm font-medium mb-2"
+                  >
                     Message
                   </label>
                   <textarea
@@ -405,11 +451,11 @@ export default function Home() {
           </motion.div>
         </div>
       </Section>
-      
+
       {/* Product Detail Modal with cart functionality */}
-      <ProductModal 
-        product={selectedProduct} 
-        isOpen={isModalOpen} 
+      <ProductModal
+        product={selectedProduct}
+        isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onAddToCart={handleAddToCart}
       />
