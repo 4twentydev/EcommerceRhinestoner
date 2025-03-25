@@ -132,9 +132,9 @@ export default function Home() {
       <Section id="hero" className="relative overflow-hidden">
         {/* Video Background with Dark Overlay */}
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-dark/70 z-10"></div>
+          <div className="absolute inset-0 bg-black/50 z-10"></div>
           <video className="w-full h-full object-cover" autoPlay loop muted playsInline>
-            <source src="https://assets.mixkit.co/videos/preview/mixkit-fashion-model-with-a-yellow-background-34371-large.mp4" type="video/mp4" />
+            <source src="/videos/hero-background.mp4" type="video/mp4" />
           </video>
         </div>
         
