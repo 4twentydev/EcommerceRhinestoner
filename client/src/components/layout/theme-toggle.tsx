@@ -11,7 +11,7 @@ export default function ThemeToggle() {
       variant="outline"
       size="icon"
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="fixed top-4 right-4 z-50 h-8 w-8 rounded-lg"
+      className="fixed top-4 right-4 z-[200] h-8 w-8 rounded-lg"
     >
       {theme === "dark" ? (
         <Sun className="h-4 w-4" />
