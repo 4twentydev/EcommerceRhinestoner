@@ -27,6 +27,8 @@ export default function Products() {
   const [sortBy, setSortBy] = useState<SortOption>("newest");
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 8;
+  const { addToCart } = useCart();
+  const { toast } = useToast();
 
   useEffect(() => {
     const handleOpenProductModal = (e: Event) => {
@@ -103,6 +105,29 @@ export default function Products() {
   const paginate = (pageNumber: number) => {
     setCurrentPage(pageNumber);
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+  
+  const handleAddToCart = (product: Product, quantity: number, size?: string, color?: string) => {
+    try {
+      addToCart({
+        product,
+        quantity,
+        size,
+        color
+      });
+      
+      toast({
+        title: "Added to cart",
+        description: `${product.title} has been added to your cart.`,
+      });
+    } catch (error) {
+      console.error("Error adding to cart:", error);
+      toast({
+        title: "Error",
+        description: "There was a problem adding this item to your cart.",
+        variant: "destructive"
+      });
+    }
   };
 
   return (
@@ -239,7 +264,8 @@ export default function Products() {
       <ProductModal 
         product={selectedProduct} 
         isOpen={isModalOpen} 
-        onClose={() => setIsModalOpen(false)} 
+        onClose={() => setIsModalOpen(false)}
+        onAddToCart={handleAddToCart}
       />
     </>
   );

@@ -4,7 +4,10 @@ import { Button } from "@/components/ui/button";
 import { FaChevronDown, FaChevronRight, FaStar, FaTimes } from "react-icons/fa";
 import Section from "@/components/layout/section";
 import ProductCard from "@/components/products/product-card";
+import ProductModal from "@/components/products/product-modal";
 import { products, featuredProducts, Product } from "@/lib/utils";
+import { useCart } from "@/hooks/use-cart";
+import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
 
 // Simplified Product Modal that doesn't depend on cart context
@@ -86,11 +89,43 @@ function SimpleProductModal({
 export default function Home() {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { toast } = useToast();
+  
+  // Handle cart functionality safely
+  let cartFunctions = { addToCart: (cartItem: any) => {} };
+  try {
+    cartFunctions = useCart();
+  } catch (error) {
+    console.warn("Cart context not available in Home:", error);
+  }
   
   // Show only 4 products on home page
   const limitedProducts = products.slice(0, 4);
   // Show only 3 featured products
   const limitedFeaturedProducts = featuredProducts.slice(0, 3);
+  
+  const handleAddToCart = (product: Product, quantity: number, size?: string, color?: string) => {
+    try {
+      cartFunctions.addToCart({
+        product,
+        quantity,
+        size,
+        color
+      });
+      
+      toast({
+        title: "Added to cart",
+        description: `${product.title} has been added to your cart.`,
+      });
+    } catch (error) {
+      console.error("Error adding to cart:", error);
+      toast({
+        title: "Error",
+        description: "There was a problem adding this item to your cart.",
+        variant: "destructive"
+      });
+    }
+  };
   
   return (
     <div className="h-screen overflow-y-auto overflow-x-hidden snap-y snap-mandatory">
@@ -297,11 +332,12 @@ export default function Home() {
         </div>
       </Section>
       
-      {/* Simple Product Detail Modal that doesn't use cart context */}
-      <SimpleProductModal 
+      {/* Product Detail Modal with cart functionality */}
+      <ProductModal 
         product={selectedProduct} 
         isOpen={isModalOpen} 
-        onClose={() => setIsModalOpen(false)} 
+        onClose={() => setIsModalOpen(false)}
+        onAddToCart={handleAddToCart}
       />
     </div>
   );
