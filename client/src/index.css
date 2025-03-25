@@ -74,6 +74,7 @@
   html {
     scroll-behavior: smooth;
     scroll-snap-type: y mandatory;
+    height: 100%;
   }
 
   body {
@@ -81,6 +82,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
+    height: 100%;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -92,6 +94,11 @@
   .section {
     scroll-snap-align: start;
     scroll-snap-stop: always;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
   }
   
   .product-card {
