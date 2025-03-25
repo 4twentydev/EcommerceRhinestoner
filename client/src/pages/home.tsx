@@ -140,18 +140,32 @@ export default function Home() {
   return (
     <div className="h-screen overflow-y-auto overflow-x-hidden snap-y snap-mandatory">
       <Section id="hero" className="relative overflow-hidden">
-        {/* Video Background with Dark Overlay */}
-        <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-black/40 z-10"></div>
-          <video 
-            className="w-full h-full object-cover" 
-            src="/videos/hero-background.mp4"
-            autoPlay 
-            loop 
-            muted 
-            playsInline
-            preload="auto"
-          />
+        {/* Animated Background with Dark Overlay */}
+        <div className="absolute inset-0 z-0 overflow-hidden">
+          <div className="absolute inset-0 bg-black/50 z-10"></div>
+          <motion.div 
+            className="w-full h-full"
+            initial={{ scale: 1 }}
+            animate={{ 
+              scale: 1.05,
+            }}
+            transition={{ 
+              duration: 20, 
+              repeat: Infinity, 
+              repeatType: "reverse", 
+              ease: "easeInOut" 
+            }}
+          >
+            <div 
+              className="w-full h-full bg-gradient-to-r from-primary/80 to-background"
+              style={{
+                backgroundImage: "url('/images/product6.jpg')",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                filter: "saturate(0.8) brightness(0.7)"
+              }}
+            ></div>
+          </motion.div>
         </div>
 
         {/* Hero Content */}
