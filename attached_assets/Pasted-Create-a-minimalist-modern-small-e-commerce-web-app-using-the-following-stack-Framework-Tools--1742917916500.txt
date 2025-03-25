@@ -1,0 +1,61 @@
+Create a minimalist modern small e-commerce web app using the following stack:
+
+**Framework & Tools:**
+- Next.js (latest)
+- Tailwind CSS v3 (with JIT mode enabled)
+- ShadCN UI for components
+- Framer Motion for animations
+- Stripe Checkout integration
+- React Icons
+
+**Design & Style:**
+- Color palette: #001011 (dark), #fffffc (light), #6ccff6 (primary), #98ce00 (secondary), and #757780 (muted) (Replace with custom hex colors)
+- Font family: "Raleway" for headings and “popping” for body (Use Google Fonts or system-safe font)
+- Dark theme default, with light theme toggle available via ShadCN
+- Fully responsive for mobile, tablet, and desktop
+
+**App Structure & Pages:**
+- **Homepage**
+  - Full-screen video hero background with dark overlay
+  - Overlaid `h1`, `h4`, and two CTAs
+  - Logo links back to homepage
+  - Vertical social links fixed on bottom right
+  - Cart icon fixed top-right and persistent on all pages
+
+- **Navigation**
+  - Collapsible sidebar nav (ShadCN or custom) with icons and text
+  - Collapsed view shows icons only
+  - Sidebar includes: New Arrivals, Products, Contact, Login (No password login – use one-click/email magic link or username-only flow)
+  - Logo remains on top and links to homepage
+
+- **New Arrivals Page**
+  - Full-page carousel with 4 featured items
+  - One product shown per scroll, left/right scroll with Framer Motion animations
+  - Overlay text: `h2`, "View Product" and "See All Products" links
+
+- **Products Page**
+  - Grid layout with support for ~35 items
+  - Filters (category, price, etc.) using ShadCN or Headless UI
+  - Product details open in a **Framer Motion animated modal** when clicked – no page navigation
+
+- **Checkout**
+  - Stripe Checkout integration (client-side)
+  - Minimal flow, cart integration, and payment
+  - Confirmation page/modal with product summary
+
+- **Contact Page**
+  - Visually engaging but clean
+  - Includes form: Name, Email, Phone, Message
+  - Only **Email or Phone** required
+  - Includes social links and contact details
+
+- **Footer**
+  - Simple, minimalist footer with legal/credits
+
+**Additional Features:**
+- Persistent cart icon (top-right)
+- Sidebar toggles with animation
+- Scroll behavior: each page should scroll as **full page view per section**, snapping scroll with smooth transitions
+- All animations should be done with Framer Motion
+
+Deploy ready, preferably with Vercel config or compatible deployment option.
