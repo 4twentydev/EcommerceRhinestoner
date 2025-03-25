@@ -334,10 +334,11 @@ export default function Home() {
       
       {/* Get in Touch Section */}
       <Section id="contact" className="relative">
-        {/* This will be replaced with BG.png once we have it */}
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-primary/40">
-          {/* Will add background image here once available */}
-        </div>
+        {/* Background with SVG */}
+        <div 
+          className="absolute inset-0 bg-no-repeat bg-cover bg-center"
+          style={{ backgroundImage: 'url("/BG.svg")' }}
+        ></div>
         <div className="container mx-auto px-6 py-20 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
