@@ -24,7 +24,7 @@ export default function CartPanel() {
   return (
     <>
       {/* Cart Button */}
-      <div className="fixed top-4 right-4 z-50">
+      <div className="fixed top-16 right-4 z-50">
         <Button 
           onClick={() => setIsCartOpen(true)}
           className="p-2 bg-primary/90 backdrop-blur-sm hover:bg-primary rounded-full text-dark shadow-lg transition-all duration-200"
