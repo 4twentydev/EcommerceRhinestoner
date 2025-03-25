@@ -1,5 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
+import express from "express";
+import path from "path";
 import { storage } from "./storage";
 import Stripe from "stripe";
 
@@ -9,10 +11,13 @@ if (!process.env.STRIPE_SECRET_KEY) {
 
 const stripeSecretKey = process.env.STRIPE_SECRET_KEY || 'sk_test_dummy_key';
 const stripe = new Stripe(stripeSecretKey, {
-  apiVersion: "2023-10-16",
+  apiVersion: "2025-02-24.acacia",
 });
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Serve static files from the public directory
+  app.use(express.static(path.join(process.cwd(), 'public')));
+  
   // API Routes
   app.get("/api/products", async (req, res) => {
     try {
