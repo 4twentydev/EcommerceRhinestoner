@@ -72,7 +72,7 @@ export default function Contact() {
       <div className="w-full md:w-1/2 h-72 md:h-screen relative">
         <div className="absolute inset-0 bg-dark/30 z-10"></div>
         <img 
-          src="https://images.unsplash.com/photo-1551739440-5dd934d3a94a?auto=format&fit=crop&q=80&w=1200" 
+          src="/logo.svg"
           alt="Contact us" 
           className="w-full h-full object-cover"
         />
