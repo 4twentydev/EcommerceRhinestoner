@@ -14,11 +14,14 @@
     --popover: 60 100% 99%;
     --popover-foreground: 195 7% 4%;
 
-    --primary: 198 91% 70%;
+    --primary: 324 84% 72%;
     --primary-foreground: 195 7% 4%;
 
-    --secondary: 84 100% 40%;
+    --secondary: 198 91% 70%;
     --secondary-foreground: 195 7% 4%;
+
+    --tertiary: 84 100% 40%;
+    --tertiary-foreground: 195 7% 4%;
 
     --muted: 234 2% 48%;
     --muted-foreground: 195 7% 30%;
@@ -56,11 +59,14 @@
     --popover: 195 7% 4%;
     --popover-foreground: 60 100% 99%;
 
-    --primary: 198 91% 70%;
+    --primary: 324 84% 72%;
     --primary-foreground: 195 7% 4%;
 
-    --secondary: 84 100% 40%;
+    --secondary: 198 91% 70%;
     --secondary-foreground: 195 7% 4%;
+
+    --tertiary: 84 100% 40%;
+    --tertiary-foreground: 195 7% 4%;
 
     --muted: 234 2% 48%;
     --muted-foreground: 60 3% 90%;
@@ -77,9 +83,9 @@
 
     --sidebar-background: 195 7% 4%;
     --sidebar-foreground: 60 100% 99%;
-    --sidebar-primary: 198 91% 70%;
+    --sidebar-primary: 324 84% 72%;
     --sidebar-primary-foreground: 195 7% 4%;
-    --sidebar-accent: 84 100% 40%;
+    --sidebar-accent: 198 91% 70%;
     --sidebar-accent-foreground: 195 7% 4%;
     --sidebar-border: 234 2% 48%;
     --sidebar-ring: 198 91% 70%;
@@ -120,7 +126,7 @@
     justify-content: center;
     width: 100%;
   }
-  
+
   .product-card {
     @apply transition-all duration-300;
   }
