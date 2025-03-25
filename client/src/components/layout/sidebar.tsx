@@ -175,12 +175,11 @@ export default function Sidebar() {
       
       {/* Desktop Sidebar - Only visible on large screens */}
       {!isMobile && (
-        <div className="fixed top-0 left-0 h-full z-40 hidden lg:flex">
-
+        <div className="fixed top-0 left-0 h-full z-40 block">
           {/* Desktop Sidebar Content */}
           <motion.div 
             className={cn(
-              "h-full bg-white/40 backdrop-blur-md shadow-xl transition-all overflow-hidden border-r border-border/50",
+              "h-full bg-background/80 backdrop-blur-md shadow-xl transition-all overflow-hidden border-r border-border/50",
               isExpanded ? "w-64" : "w-16"
             )}
             initial={{ width: "4rem" }}
