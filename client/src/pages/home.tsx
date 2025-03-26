@@ -430,7 +430,7 @@ export default function Home() {
                     <input
                       id="email"
                       type="email"
-                      className="w-full px-4 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50"
+                      className="w-full px-4 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-brand-lt-cyan/50"
                       placeholder="Your email"
                     />
                   </div>
@@ -445,7 +445,7 @@ export default function Home() {
                   <textarea
                     id="message"
                     rows={4}
-                    className="w-full px-4 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50"
+                    className="w-full px-4 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-brand-lt-cyan/50"
                     placeholder="How can we help you?"
                   ></textarea>
                 </div>
