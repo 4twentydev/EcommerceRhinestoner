@@ -22,56 +22,33 @@ const ThemeProviderContext = createContext<ThemeProviderState>(initialState);
 
 export function ThemeProvider({
   children,
-  defaultTheme = "dark", // Dark mode as default
+  defaultTheme = "dark",
   storageKey = "ecommerce-theme",
   ...props
 }: ThemeProviderProps) {
-  // Initialize with dark theme by default
   const [theme, setTheme] = useState<Theme>(
     () => (localStorage.getItem(storageKey) as Theme) || defaultTheme
   );
 
-  // Apply the theme class to the document element
   useEffect(() => {
     const root = window.document.documentElement;
-    
+    root.classList.remove("light", "dark");
+
     if (theme === "system") {
-      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-      root.classList.remove("light", "dark");
+      const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light";
       root.classList.add(systemTheme);
     } else {
-      root.classList.remove("light", "dark");
       root.classList.add(theme);
     }
-    
-    localStorage.setItem(storageKey, theme);
   }, [theme]);
 
-  // Add a listener for system theme changes
-  useEffect(() => {
-    if (theme === "system") {
-      const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-      
-      const handleChange = () => {
-        const root = window.document.documentElement;
-        const systemTheme = mediaQuery.matches ? "dark" : "light";
-        
-        root.classList.remove("light", "dark");
-        root.classList.add(systemTheme);
-        document.body.setAttribute("data-theme", systemTheme);
-      };
-      
-      mediaQuery.addEventListener("change", handleChange);
-      return () => mediaQuery.removeEventListener("change", handleChange);
-    }
-  }, [theme]);
-
-  // Create the context value
   const value = {
     theme,
-    setTheme: (newTheme: Theme) => {
-      localStorage.setItem(storageKey, newTheme);
-      setTheme(newTheme);
+    setTheme: (theme: Theme) => {
+      localStorage.setItem(storageKey, theme);
+      setTheme(theme);
     },
   };
 
@@ -82,7 +59,6 @@ export function ThemeProvider({
   );
 }
 
-// Hook to use the theme context
 export const useTheme = () => {
   const context = useContext(ThemeProviderContext);
 
