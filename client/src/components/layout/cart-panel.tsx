@@ -147,7 +147,7 @@ export default function CartPanel() {
                                 variant="ghost" 
                                 size="icon" 
                                 onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
-                                className="w-5 h-5 flex items-center justify-center rounded text-foreground/80 hover:text-[#67b4ff] transition-colors"
+                                className="w-5 h-5 flex items-center justify-center rounded text-foreground/80 hover:text-brand-dk-cyan transition-colors"
                                 disabled={item.quantity <= 1}
                               >
                                 <FaMinus className="h-3 w-3" />
@@ -157,7 +157,7 @@ export default function CartPanel() {
                                 variant="ghost" 
                                 size="icon" 
                                 onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
-                                className="w-5 h-5 flex items-center justify-center rounded text-foreground/80 hover:text-[#67b4ff] transition-colors"
+                                className="w-5 h-5 flex items-center justify-center rounded text-foreground/80 hover:text-brand-dk-cyan transition-colors"
                               >
                                 <FaPlus className="h-3 w-3" />
                               </Button>
@@ -210,7 +210,7 @@ export default function CartPanel() {
                   <Link href="/products" className="w-full">
                     <Button 
                       variant="outline" 
-                      className="w-full py-3 border border-border text-foreground font-medium rounded-lg hover:bg-[#e0f2ff]/40 transition-colors"
+                      className="w-full py-3 border border-border text-foreground font-medium rounded-lg hover:bg-brand-lt-cyan/10 transition-colors"
                       onClick={() => setIsCartOpen(false)}
                     >
                       Continue Shopping
