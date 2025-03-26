@@ -138,13 +138,13 @@ export default function Home() {
   };
 
   return (
-    <div className="h-screen overflow-y-auto overflow-x-hidden snap-y snap-mandatory">
-      <Section id="hero" className="relative overflow-hidden">
+    <div className="h-screen overflow-y-auto overflow-x-hidden snap-y snap-mandatory max-w-full">
+      <Section id="hero" className="relative overflow-hidden w-screen">
         {/* Video Background with Dark Overlay */}
-        <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 z-0 w-screen">
           <div className="absolute inset-0 bg-black/50 z-10"></div>
           <video
-            className="absolute inset-0 w-full h-full object-cover"
+            className="absolute inset-0 min-w-full min-h-full w-auto h-auto object-fill max-w-none"
             autoPlay
             muted
             loop
