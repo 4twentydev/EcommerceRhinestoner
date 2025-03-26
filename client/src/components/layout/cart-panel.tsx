@@ -95,16 +95,18 @@ export default function CartPanel() {
             transition={{ type: "tween", duration: 0.3 }}
           >
             <div className="h-full flex flex-col">
-              <div className="p-4 border-b border-muted/20 flex justify-between items-center">
-                <h3 className="font-heading text-xl">Your Cart ({getTotalItems()})</h3>
+              <div className="p-4 border-b border-muted/20 flex justify-between items-center relative">
+                {/* Close button on left side */}
                 <Button 
                   variant="ghost" 
                   size="icon" 
                   onClick={() => setIsCartOpen(false)}
-                  className="w-8 h-8 flex items-center justify-center rounded-full bg-accent text-accent-foreground hover:bg-primary hover:text-primary-foreground transition-colors"
+                  className="absolute -left-12 top-1/2 transform -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-l-lg rounded-r-none bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg transition-colors"
                 >
-                  <FaTimes className="h-4 w-4" />
+                  <FaTimes className="h-5 w-5" />
                 </Button>
+                
+                <h3 className="font-heading text-xl mx-auto">Your Cart ({getTotalItems()})</h3>
               </div>
               
               <div className="flex-1 overflow-y-auto p-4">
