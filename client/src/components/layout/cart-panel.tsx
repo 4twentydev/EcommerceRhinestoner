@@ -70,10 +70,10 @@ export default function CartPanel() {
   return (
     <>
       {/* Cart Button */}
-      <div className="fixed top-16 right-4 z-50">
+      <div className="fixed bottom-4 right-4 z-50">
         <Button 
           onClick={() => setIsCartOpen(true)}
-          className="p-2 bg-secondary/90 backdrop-blur-sm hover:bg-secondary rounded-full text-secondary-foreground shadow-lg transition-all duration-200"
+          className="p-3 bg-primary/80 backdrop-blur-sm hover:bg-primary rounded-full text-primary-foreground shadow-xl transition-all duration-200"
           aria-label="Open shopping cart"
         >
           <FaShoppingCart className="h-5 w-5" />
