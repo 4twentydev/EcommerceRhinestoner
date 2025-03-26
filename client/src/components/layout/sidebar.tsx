@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link, useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
@@ -11,8 +11,7 @@ import {
   FaSignInAlt,
   FaBars,
   FaTimes,
-  FaCube,
-  FaShoppingCart
+  FaCube
 } from "react-icons/fa";
 
 const navItems = [
@@ -24,88 +23,54 @@ const navItems = [
 
 export default function Sidebar() {
   const [location] = useLocation();
-  const [isExpanded, setIsExpanded] = useState(false); // Collapsed by default
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Check if the device is mobile
-  useEffect(() => {
-    const checkIsMobile = () => {
-      setIsMobile(window.innerWidth < 1024);
-    };
-    
-    // Initial check
-    checkIsMobile();
-    
-    // Listen for window resize events
-    window.addEventListener('resize', checkIsMobile);
-    
-    // Cleanup
-    return () => window.removeEventListener('resize', checkIsMobile);
-  }, []);
-
-  // Toggle desktop sidebar
-  const toggleSidebar = () => {
-    setIsExpanded(!isExpanded);
+  // Toggle menu open/close
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+    // Prevent scrolling when menu is open
+    document.body.style.overflow = !isMenuOpen ? 'hidden' : 'auto';
   };
 
-  // Toggle mobile menu
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-    // Prevent scrolling when mobile menu is open
-    document.body.style.overflow = !isMobileMenuOpen ? 'hidden' : 'auto';
-  };
-
-  // Close mobile menu when a link is clicked
-  const handleMobileLinkClick = () => {
-    setIsMobileMenuOpen(false);
+  // Close menu when a link is clicked
+  const handleLinkClick = () => {
+    setIsMenuOpen(false);
     document.body.style.overflow = 'auto';
-  };
-  
-  // Handle sidebar link click - auto collapse sidebar
-  const handleSidebarLinkClick = () => {
-    setIsExpanded(false);
   };
 
   return (
     <>
-      {/* Mobile Menu Toggle Button */}
+      {/* Menu Toggle Button - For all screen sizes */}
       <Button 
-        onClick={toggleMobileMenu}
+        onClick={toggleMenu}
         variant="ghost" 
-        className="fixed top-4 left-4 z-50 p-2 bg-background/80 backdrop-blur-sm rounded-full text-foreground shadow-md hover:bg-primary/10 transition-all duration-200 lg:hidden"
-        aria-label="Toggle mobile menu"
+        className="fixed top-4 left-4 z-50 p-2 bg-background/80 backdrop-blur-sm rounded-full text-foreground shadow-md hover:bg-primary/10 transition-all duration-200"
+        aria-label="Toggle menu"
       >
-        <FaBars className="h-5 w-5" />
-      </Button>
-
-      {/* Desktop Cube Icon - Used to toggle sidebar */}
-      <Button
-        onClick={toggleSidebar}
-        variant="ghost"
-        className="hidden lg:flex fixed top-4 left-4 z-50 p-3 bg-background/80 backdrop-blur-sm rounded-full text-green-500 shadow-md hover:bg-green-500/10 transition-all duration-200"
-        aria-label="Toggle sidebar"
-      >
-        <FaCube className="h-8 w-8" />
+        {isMenuOpen ? (
+          <FaTimes className="h-5 w-5" />
+        ) : (
+          <FaBars className="h-5 w-5" />
+        )}
       </Button>
       
-      {/* Mobile Full Screen Menu with Spiral Animation */}
+      {/* Full Screen Menu with Spiral Animation */}
       <AnimatePresence>
-        {isMobileMenuOpen && (
+        {isMenuOpen && (
           <>
             {/* Background Overlay */}
             <motion.div 
-              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden"
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
-              onClick={toggleMobileMenu}
+              onClick={toggleMenu}
             />
             
             {/* Menu Container with Spiral Animation */}
             <motion.div 
-              className="fixed top-0 left-0 w-full h-full bg-background z-50 lg:hidden overflow-hidden"
+              className="fixed top-0 left-0 w-full h-full bg-background z-50 overflow-hidden"
               initial={{ 
                 clipPath: "circle(0% at 2rem 2rem)",
                 opacity: 0
@@ -126,11 +91,14 @@ export default function Sidebar() {
               }}
             >
               <div className="flex flex-col h-full">
-                {/* Simplified Mobile Menu Header */}
-                <div className="flex justify-between items-center p-4">
-                  <h1 className="text-xl font-heading font-bold">Menu</h1>
+                {/* Menu Header */}
+                <div className="flex justify-between items-center p-6">
+                  <Link href="/" onClick={handleLinkClick} className="flex items-center space-x-3">
+                    <FaCube className="text-green-500 text-3xl" />
+                    <h1 className="text-2xl font-heading font-bold">Rhinestoner</h1>
+                  </Link>
                   <Button 
-                    onClick={toggleMobileMenu}
+                    onClick={toggleMenu}
                     variant="ghost" 
                     size="icon"
                     className="rounded-full hover:bg-accent/10"
@@ -140,9 +108,9 @@ export default function Sidebar() {
                   </Button>
                 </div>
                 
-                {/* Simplified Navigation */}
-                <nav className="flex-1 p-4">
-                  <div className="space-y-2">
+                {/* Navigation */}
+                <nav className="flex-1 p-6">
+                  <div className="space-y-4">
                     {navItems.map((item, index) => (
                       <motion.div
                         key={item.path}
@@ -152,114 +120,50 @@ export default function Sidebar() {
                       >
                         <Link 
                           href={item.path}
-                          onClick={handleMobileLinkClick}
+                          onClick={handleLinkClick}
                           className={cn(
-                            "flex items-center space-x-3 p-3 rounded-lg",
+                            "flex items-center space-x-4 p-4 rounded-lg text-lg transition-colors",
                             location === item.path 
-                              ? "text-primary font-medium" 
-                              : "text-foreground"
+                              ? "bg-green-500/20 text-green-500 font-medium" 
+                              : "text-foreground hover:bg-green-500/10"
                           )}
                         >
-                          <span>{item.icon}</span>
+                          <span className="text-2xl">{item.icon}</span>
                           <span>{item.name}</span>
                         </Link>
                       </motion.div>
                     ))}
+                    
+                    {/* Login Button */}
+                    <motion.div
+                      initial={{ x: -20, opacity: 0 }}
+                      animate={{ x: 0, opacity: 1 }}
+                      transition={{ delay: navItems.length * 0.05 }}
+                      className="mt-8"
+                    >
+                      <Link 
+                        href="#login" 
+                        onClick={handleLinkClick}
+                        className="flex items-center space-x-4 p-4 rounded-lg text-lg font-medium text-white bg-green-500 hover:bg-green-600 transition-colors"
+                      >
+                        <span className="text-2xl"><FaSignInAlt /></span>
+                        <span>Login</span>
+                      </Link>
+                    </motion.div>
                   </div>
                 </nav>
+                
+                {/* Footer */}
+                <div className="p-6 border-t border-muted/10">
+                  <p className="text-light/60 text-sm">
+                    © {new Date().getFullYear()} Rhinestoner. All rights reserved.
+                  </p>
+                </div>
               </div>
             </motion.div>
           </>
         )}
       </AnimatePresence>
-      
-      {/* Desktop Sidebar - Only visible on large screens */}
-      {!isMobile && (
-        <div className="fixed top-0 left-0 h-full z-40 block">
-          {/* Desktop Sidebar Content */}
-          <motion.div 
-            className={cn(
-              "h-full bg-background/80 backdrop-blur-md shadow-xl transition-all overflow-hidden border-r border-border/50",
-              isExpanded ? "w-64" : "w-16"
-            )}
-            initial={{ width: "4rem" }}
-            animate={{ width: isExpanded ? "16rem" : "4rem" }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-          >
-            <div className="p-5">
-              <Link href="/" onClick={handleSidebarLinkClick} className="flex items-center space-x-4">
-                <div className="flex-shrink-0 text-green-500 text-3xl">
-                  <FaCube />
-                </div>
-                <AnimatePresence mode="wait">
-                  {isExpanded && (
-                    <motion.h1 
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      className="text-xl font-heading font-bold whitespace-nowrap"
-                    >
-                      ShadowVault
-                    </motion.h1>
-                  )}
-                </AnimatePresence>
-              </Link>
-            </div>
-            
-            <nav className="mt-8 px-4">
-              <div className="space-y-2">
-                {navItems.map((item) => (
-                  <Link 
-                    key={item.path} 
-                    href={item.path}
-                    onClick={handleSidebarLinkClick}
-                    className={cn(
-                      "flex items-center space-x-3 p-3 rounded-lg transition-colors",
-                      location === item.path 
-                        ? "bg-green-500/20 text-green-500" 
-                        : "text-foreground hover:bg-green-500/10"
-                    )}
-                  >
-                    {item.icon}
-                    <AnimatePresence mode="wait">
-                      {isExpanded && (
-                        <motion.span 
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                          className="whitespace-nowrap"
-                        >
-                          {item.name}
-                        </motion.span>
-                      )}
-                    </AnimatePresence>
-                  </Link>
-                ))}
-                
-                <Link 
-                  href="#login" 
-                  onClick={handleSidebarLinkClick}
-                  className="flex items-center space-x-3 p-3 rounded-lg text-white bg-green-500 hover:bg-green-600 transition-colors mt-8"
-                >
-                  <FaSignInAlt className="w-6 text-center" />
-                  <AnimatePresence mode="wait">
-                    {isExpanded && (
-                      <motion.span 
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        className="whitespace-nowrap"
-                      >
-                        Login
-                      </motion.span>
-                    )}
-                  </AnimatePresence>
-                </Link>
-              </div>
-            </nav>
-          </motion.div>
-        </div>
-      )}
     </>
   );
 }
