@@ -217,7 +217,7 @@ export default function ProductModal({
                   </Button>
                   <Button 
                     onClick={handleAddToCart}
-                    className="flex-1 py-3 rounded-lg bg-primary text-dark font-medium hover:bg-primary/90 transition-colors"
+                    className="flex-1 py-3 rounded-lg bg-brand-lt-cyan text-brand-dark font-medium hover:bg-brand-lt-cyan/90 transition-colors"
                   >
                     Add to Cart
                   </Button>

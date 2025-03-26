@@ -200,7 +200,7 @@ export default function CartPanel() {
                   
                   <Link href="/checkout">
                     <Button 
-                      className="w-full py-3 bg-primary text-primary-foreground font-medium rounded-lg hover:bg-primary/90 transition-colors mb-3"
+                      className="w-full py-3 bg-brand-lt-cyan text-brand-dark font-medium rounded-lg hover:bg-brand-lt-cyan/90 transition-colors mb-3"
                       onClick={() => setIsCartOpen(false)}
                     >
                       Proceed to Checkout
@@ -210,7 +210,7 @@ export default function CartPanel() {
                   <Link href="/products" className="w-full">
                     <Button 
                       variant="outline" 
-                      className="w-full py-3 border border-border text-foreground font-medium rounded-lg hover:bg-brand-lt-cyan/10 transition-colors"
+                      className="w-full py-3 border border-brand-lt-cyan text-brand-lt-cyan font-medium rounded-lg hover:bg-brand-lt-cyan/10 transition-colors"
                       onClick={() => setIsCartOpen(false)}
                     >
                       Continue Shopping
