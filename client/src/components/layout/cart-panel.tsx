@@ -73,7 +73,7 @@ export default function CartPanel() {
       <div className="fixed bottom-4 right-4 z-50">
         <Button 
           onClick={() => setIsCartOpen(true)}
-          className="p-3 bg-primary/80 backdrop-blur-sm hover:bg-primary rounded-full text-primary-foreground shadow-xl transition-all duration-200"
+          className="p-3 bg-[#67b4ff]/80 backdrop-blur-sm hover:bg-[#67b4ff] rounded-full text-white shadow-xl transition-all duration-200"
           aria-label="Open shopping cart"
         >
           <FaShoppingCart className="h-5 w-5" />
@@ -101,7 +101,7 @@ export default function CartPanel() {
                   variant="ghost" 
                   size="icon" 
                   onClick={() => setIsCartOpen(false)}
-                  className="absolute -left-12 top-1/2 transform -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-l-lg rounded-r-none bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg transition-colors"
+                  className="absolute -left-12 top-1/2 transform -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-l-lg rounded-r-none bg-[#67b4ff] text-white hover:bg-[#48a2ff] shadow-lg transition-colors"
                 >
                   <FaTimes className="h-5 w-5" />
                 </Button>
@@ -126,7 +126,7 @@ export default function CartPanel() {
                 ) : (
                   <div className="space-y-4">
                     {cartItems.map((item) => (
-                      <div key={`${item.product.id}-${item.size}-${item.color}`} className="flex gap-4 bg-accent/40 rounded-lg p-3">
+                      <div key={`${item.product.id}-${item.size}-${item.color}`} className="flex gap-4 bg-[#e0f2ff]/40 rounded-lg p-3">
                         <div className="w-20 h-20 flex-shrink-0 rounded-md overflow-hidden">
                           <img 
                             src={item.product.image} 
@@ -147,7 +147,7 @@ export default function CartPanel() {
                                 variant="ghost" 
                                 size="icon" 
                                 onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
-                                className="w-5 h-5 flex items-center justify-center rounded text-foreground/80 hover:text-primary transition-colors"
+                                className="w-5 h-5 flex items-center justify-center rounded text-foreground/80 hover:text-[#67b4ff] transition-colors"
                                 disabled={item.quantity <= 1}
                               >
                                 <FaMinus className="h-3 w-3" />
@@ -157,7 +157,7 @@ export default function CartPanel() {
                                 variant="ghost" 
                                 size="icon" 
                                 onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
-                                className="w-5 h-5 flex items-center justify-center rounded text-foreground/80 hover:text-primary transition-colors"
+                                className="w-5 h-5 flex items-center justify-center rounded text-foreground/80 hover:text-[#67b4ff] transition-colors"
                               >
                                 <FaPlus className="h-3 w-3" />
                               </Button>
@@ -210,7 +210,7 @@ export default function CartPanel() {
                   <Link href="/products" className="w-full">
                     <Button 
                       variant="outline" 
-                      className="w-full py-3 border border-border text-foreground font-medium rounded-lg hover:bg-accent transition-colors"
+                      className="w-full py-3 border border-border text-foreground font-medium rounded-lg hover:bg-[#e0f2ff]/40 transition-colors"
                       onClick={() => setIsCartOpen(false)}
                     >
                       Continue Shopping
