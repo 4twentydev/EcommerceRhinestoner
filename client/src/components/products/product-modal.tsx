@@ -125,22 +125,22 @@ export default function ProductModal({
                 )}
                 <h2 className="font-heading text-2xl md:text-3xl mt-2">{product.title}</h2>
                 <div className="flex items-center mt-2 mb-4">
-                  <div className="flex text-primary">
+                  <div className="flex text-brand-lt-yellow">
                     <FaStar />
                     <FaStar />
                     <FaStar />
                     <FaStar />
                     <FaStarHalfAlt />
                   </div>
-                  <span className="text-light/60 text-sm ml-2">4.5 (128 reviews)</span>
+                  <span className="text-brand-light/70 text-sm ml-2">4.5 (128 reviews)</span>
                 </div>
                 
                 <div className="mb-6">
                   <h3 className="font-heading text-3xl font-semibold">{product.formattedPrice}</h3>
-                  <p className="text-light/60 text-sm">Free shipping on orders over $100</p>
+                  <p className="text-brand-light/70 text-sm">Free shipping on orders over $100</p>
                 </div>
                 
-                <p className="text-light/80 mb-6">
+                <p className="text-brand-light/80 mb-6">
                   {product.description}
                 </p>
                 
@@ -154,8 +154,8 @@ export default function ProductModal({
                           variant="outline"
                           className={`w-12 h-10 border ${
                             selectedSize === size
-                              ? 'border-primary bg-primary/10 text-primary'
-                              : 'border-muted text-light/80 hover:border-primary hover:text-primary'
+                              ? 'border-brand-lt-cyan bg-brand-lt-cyan/10 text-brand-lt-cyan'
+                              : 'border-muted text-brand-light/80 hover:border-brand-lt-cyan hover:text-brand-lt-cyan'
                           }`}
                           onClick={() => setSelectedSize(size)}
                         >
@@ -174,7 +174,7 @@ export default function ProductModal({
                         <button 
                           key={color}
                           className={`w-8 h-8 rounded-full ${
-                            selectedColor === color ? 'ring-2 ring-primary' : ''
+                            selectedColor === color ? 'ring-2 ring-brand-lt-cyan' : ''
                           }`}
                           style={{ backgroundColor: color }}
                           onClick={() => setSelectedColor(color)}
@@ -189,7 +189,7 @@ export default function ProductModal({
                   <div className="flex items-center border border-muted rounded-md">
                     <Button 
                       variant="ghost"
-                      className="px-3 py-2 text-light/80 hover:text-primary transition-colors"
+                      className="px-3 py-2 text-brand-light/80 hover:text-brand-lt-cyan transition-colors"
                       onClick={decreaseQuantity}
                       disabled={quantity <= 1}
                     >
@@ -198,20 +198,20 @@ export default function ProductModal({
                     <span className="quantity-display px-4 py-2 border-x border-muted">{quantity}</span>
                     <Button 
                       variant="ghost"
-                      className="px-3 py-2 text-light/80 hover:text-primary transition-colors"
+                      className="px-3 py-2 text-brand-light/80 hover:text-brand-lt-cyan transition-colors"
                       onClick={increaseQuantity}
                       disabled={quantity >= stockCount}
                     >
                       <FaPlus />
                     </Button>
                   </div>
-                  <span className="text-light/60 text-sm">{stockCount} items left</span>
+                  <span className="text-brand-light/60 text-sm">{stockCount} items left</span>
                 </div>
                 
                 <div className="flex gap-4">
                   <Button 
                     variant="outline"
-                    className="flex-1 py-3 rounded-lg border border-primary text-primary font-medium hover:bg-primary/10 transition-all duration-300"
+                    className="flex-1 py-3 rounded-lg border border-brand-lt-cyan text-brand-lt-cyan font-medium hover:bg-brand-lt-cyan/10 transition-all duration-300"
                   >
                     Add to Wishlist
                   </Button>
