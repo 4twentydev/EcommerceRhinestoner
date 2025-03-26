@@ -84,7 +84,7 @@ export default function SocialShare({ product }: SocialShareProps) {
         <span>Share</span>
       </Button>
 
-      <AnimatePresence>
+      <AnimatePresence mode="sync">
         {isOpen && (
           <motion.div
             initial={{ opacity: 0, scale: 0.9, y: 10 }}

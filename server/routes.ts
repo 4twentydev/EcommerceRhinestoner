@@ -132,7 +132,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
               <div>
                 <h1 style="margin-top: 0; color: #333;">${product.title}</h1>
                 <p style="color: #666;">${product.description}</p>
-                <p style="font-weight: bold; color: #0891B2;">${product.formattedPrice}</p>
+                <p style="font-weight: bold; color: #0891B2;">$${product.price.toFixed(2)}</p>
                 <a href="${productUrl}" style="display: inline-block; background-color: #0891B2; color: white; padding: 10px 15px; text-decoration: none; border-radius: 4px;">View Product</a>
               </div>
             </div>
