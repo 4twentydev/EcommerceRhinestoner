@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Product } from "@/lib/utils";
 import { FaMinus, FaPlus, FaTimes, FaStar, FaStarHalfAlt } from "react-icons/fa";
+import SocialShare from "./social-share";
 
 type ProductModalProps = {
   product: Product | null;
@@ -208,19 +209,25 @@ export default function ProductModal({
                   <span className="text-brand-light/60 text-sm">{stockCount} items left</span>
                 </div>
                 
-                <div className="flex gap-4">
-                  <Button 
-                    variant="outline"
-                    className="flex-1 py-3 rounded-lg border border-brand-lt-cyan text-brand-lt-cyan font-medium hover:bg-brand-lt-cyan/10 transition-all duration-300"
-                  >
-                    Add to Wishlist
-                  </Button>
-                  <Button 
-                    onClick={handleAddToCart}
-                    className="flex-1 py-3 rounded-lg bg-brand-lt-cyan text-brand-dark font-medium hover:bg-brand-lt-cyan/90 transition-colors"
-                  >
-                    Add to Cart
-                  </Button>
+                <div className="flex flex-wrap gap-4">
+                  <div className="flex gap-4 w-full">
+                    <Button 
+                      variant="outline"
+                      className="flex-1 py-3 rounded-lg border border-brand-lt-cyan text-brand-lt-cyan font-medium hover:bg-brand-lt-cyan/10 transition-all duration-300"
+                    >
+                      Add to Wishlist
+                    </Button>
+                    <Button 
+                      onClick={handleAddToCart}
+                      className="flex-1 py-3 rounded-lg bg-brand-lt-cyan text-brand-dark font-medium hover:bg-brand-lt-cyan/90 transition-colors"
+                    >
+                      Add to Cart
+                    </Button>
+                  </div>
+                  
+                  <div className="flex justify-center w-full mt-2">
+                    <SocialShare product={product} />
+                  </div>
                 </div>
               </div>
             </div>
