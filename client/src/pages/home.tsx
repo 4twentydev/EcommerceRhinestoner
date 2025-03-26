@@ -25,16 +25,16 @@ function SimpleProductModal({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       <div
-        className="absolute inset-0 bg-dark/80 backdrop-blur-sm"
+        className="absolute inset-0 bg-brand-dark/80 backdrop-blur-sm"
         onClick={onClose}
       ></div>
 
-      <div className="relative bg-dark border border-muted/20 rounded-lg shadow-2xl w-full max-w-5xl mx-4 overflow-hidden">
+      <div className="relative bg-brand-dark border border-muted/20 rounded-lg shadow-2xl w-full max-w-5xl mx-4 overflow-hidden">
         <Button
           variant="ghost"
           size="icon"
           onClick={onClose}
-          className="absolute top-4 right-4 z-10 w-8 h-8 flex items-center justify-center rounded-full bg-dark/60 text-light hover:bg-primary hover:text-dark transition-colors"
+          className="absolute top-4 right-4 z-10 w-8 h-8 flex items-center justify-center rounded-full bg-brand-dark/60 text-brand-light hover:bg-brand-lt-cyan hover:text-brand-dark transition-colors"
         >
           <FaTimes />
         </Button>
@@ -64,22 +64,22 @@ function SimpleProductModal({
               <h3 className="font-heading text-3xl font-semibold">
                 {product.formattedPrice}
               </h3>
-              <p className="text-light/60 text-sm">
+              <p className="text-brand-light/60 text-sm">
                 Free shipping on orders over $100
               </p>
             </div>
 
-            <p className="text-light/80 mb-6">{product.description}</p>
+            <p className="text-brand-light/80 mb-6">{product.description}</p>
 
             <div className="flex gap-4">
               <Button
                 variant="outline"
-                className="flex-1 py-3 rounded-lg border border-primary text-primary font-medium hover:bg-primary/10 transition-all duration-300"
+                className="flex-1 py-3 rounded-lg border border-brand-lt-cyan text-brand-lt-cyan font-medium hover:bg-brand-lt-cyan/10 transition-all duration-300"
               >
                 View Details
               </Button>
               <Link href="/products">
-                <Button className="flex-1 py-3 rounded-lg bg-primary text-dark font-medium hover:bg-primary/90 transition-colors">
+                <Button className="flex-1 py-3 rounded-lg bg-brand-lt-cyan text-brand-dark font-medium hover:bg-brand-lt-cyan/90 transition-colors">
                   See All Products
                 </Button>
               </Link>
@@ -96,17 +96,23 @@ export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { toast } = useToast();
 
-  // Handle cart functionality safely
-  let cartFunctions = { 
-    addToCart: (cartItem: any) => {
-      console.log("Cart operation not available");
-    } 
-  };
-  
+  // Access cart functions with a fallback
+  let cartFunctions;
   try {
     cartFunctions = useCart();
   } catch (error) {
-    console.warn("Cart context not available in Home:", error);
+    // Provide fallback functions if cart context is not available
+    cartFunctions = {
+      cartItems: [],
+      addToCart: () => console.log("Cart context not available"),
+      removeFromCart: () => {},
+      updateQuantity: () => {},
+      clearCart: () => {},
+      isCartOpen: false,
+      setIsCartOpen: () => {},
+      getTotalItems: () => 0,
+      getTotalPrice: () => 0
+    };
   }
 
   // Show only 4 products on home page
@@ -172,7 +178,7 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            Welcome to <span className="text-primary font-semibold">Rhinestoner</span>{" "}
+            Welcome to <span className="text-brand-lt-cyan font-semibold">Rhinestoner</span>{" "}
           </motion.h1>
           <motion.h4
             className="font-sans text-lg md:text-xl text-light/80 max-w-2xl mx-auto mb-10"
