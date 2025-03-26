@@ -114,12 +114,14 @@ export default function CartPanel() {
                   <div className="flex flex-col items-center justify-center h-full">
                     <FaShoppingCart className="h-12 w-12 text-muted-foreground mb-4" />
                     <p className="text-muted-foreground text-center">Your cart is empty</p>
-                    <Button 
-                      onClick={() => setIsCartOpen(false)}
-                      className="mt-4"
-                    >
-                      Continue Shopping
-                    </Button>
+                    <Link href="/products">
+                      <Button 
+                        onClick={() => setIsCartOpen(false)}
+                        className="mt-4"
+                      >
+                        Continue Shopping
+                      </Button>
+                    </Link>
                   </div>
                 ) : (
                   <div className="space-y-4">
@@ -205,13 +207,15 @@ export default function CartPanel() {
                     </Button>
                   </Link>
                   
-                  <Button 
-                    variant="outline" 
-                    className="w-full py-3 border border-border text-foreground font-medium rounded-lg hover:bg-accent transition-colors"
-                    onClick={() => setIsCartOpen(false)}
-                  >
-                    Continue Shopping
-                  </Button>
+                  <Link href="/products" className="w-full">
+                    <Button 
+                      variant="outline" 
+                      className="w-full py-3 border border-border text-foreground font-medium rounded-lg hover:bg-accent transition-colors"
+                      onClick={() => setIsCartOpen(false)}
+                    >
+                      Continue Shopping
+                    </Button>
+                  </Link>
                 </div>
               )}
             </div>
