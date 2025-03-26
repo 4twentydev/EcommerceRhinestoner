@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="300" height="200" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Filters for shine and glow effects -->
+    <filter id="shine" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3" result="blur" />
+      <feSpecularLighting in="blur" surfaceScale="5" specularConstant="0.5" specularExponent="20" result="specular">
+        <fePointLight x="150" y="60" z="20" />
+      </feSpecularLighting>
+      <feComposite in="specular" in2="SourceGraphic" operator="in" result="composite" />
+      <feComposite in="composite" in2="SourceGraphic" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" />
+    </filter>
+    
+    <!-- Gradient definitions for various jewels -->
+    <radialGradient id="purpleGem" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="#f5eeff" />
+      <stop offset="50%" stop-color="#d8b4fe" />
+      <stop offset="100%" stop-color="#a855f7" />
+    </radialGradient>
+    
+    <radialGradient id="blueGem" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="#e0f2fe" />
+      <stop offset="50%" stop-color="#7dd3fc" />
+      <stop offset="100%" stop-color="#0284c7" />
+    </radialGradient>
+    
+    <radialGradient id="pinkGem" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="#fce7f3" />
+      <stop offset="50%" stop-color="#f9a8d4" />
+      <stop offset="100%" stop-color="#db2777" />
+    </radialGradient>
+    
+    <radialGradient id="clearGem" cx="50%" cy="50%" r="50%" fx="30%" fy="30%">
+      <stop offset="0%" stop-color="#ffffff" />
+      <stop offset="50%" stop-color="#f8fafc" />
+      <stop offset="100%" stop-color="#e2e8f0" />
+    </radialGradient>
+  </defs>
+  
+  <!-- Main jewel cluster -->
+  <g transform="translate(150, 100)" filter="url(#shine)">
+    <!-- Large jewels in the center -->
+    <circle cx="0" cy="0" r="35" fill="url(#clearGem)" opacity="0.9"/>
+    <circle cx="-28" cy="-15" r="20" fill="url(#purpleGem)" opacity="0.8"/>
+    <circle cx="25" cy="-10" r="22" fill="url(#blueGem)" opacity="0.8"/>
+    <circle cx="-18" cy="20" r="18" fill="url(#pinkGem)" opacity="0.8"/>
+    <circle cx="15" cy="22" r="19" fill="url(#purpleGem)" opacity="0.7"/>
+    
+    <!-- Medium jewels -->
+    <circle cx="-40" cy="0" r="15" fill="url(#blueGem)" opacity="0.7"/>
+    <circle cx="40" cy="5" r="14" fill="url(#pinkGem)" opacity="0.7"/>
+    <circle cx="-10" cy="-35" r="13" fill="url(#clearGem)" opacity="0.8"/>
+    <circle cx="12" cy="-30" r="12" fill="url(#purpleGem)" opacity="0.7"/>
+    <circle cx="-5" cy="38" r="14" fill="url(#blueGem)" opacity="0.7"/>
+    
+    <!-- Small jewels scattered around -->
+    <circle cx="-50" cy="-25" r="8" fill="url(#pinkGem)" opacity="0.6"/>
+    <circle cx="-60" cy="10" r="7" fill="url(#clearGem)" opacity="0.7"/>
+    <circle cx="-45" cy="30" r="9" fill="url(#purpleGem)" opacity="0.6"/>
+    <circle cx="-25" cy="45" r="8" fill="url(#blueGem)" opacity="0.6"/>
+    <circle cx="0" cy="45" r="7" fill="url(#clearGem)" opacity="0.7"/>
+    <circle cx="30" cy="35" r="8" fill="url(#pinkGem)" opacity="0.6"/>
+    <circle cx="50" cy="20" r="7" fill="url(#purpleGem)" opacity="0.6"/>
+    <circle cx="55" cy="-5" r="9" fill="url(#blueGem)" opacity="0.6"/>
+    <circle cx="45" cy="-25" r="8" fill="url(#clearGem)" opacity="0.7"/>
+    <circle cx="25" cy="-45" r="7" fill="url(#pinkGem)" opacity="0.6"/>
+    <circle cx="0" cy="-50" r="9" fill="url(#purpleGem)" opacity="0.6"/>
+    <circle cx="-25" cy="-45" r="8" fill="url(#blueGem)" opacity="0.6"/>
+    
+    <!-- Tiny jewels for added detail -->
+    <circle cx="-65" cy="-20" r="4" fill="url(#clearGem)" opacity="0.6"/>
+    <circle cx="-70" cy="0" r="3" fill="url(#pinkGem)" opacity="0.5"/>
+    <circle cx="-60" cy="25" r="5" fill="url(#blueGem)" opacity="0.5"/>
+    <circle cx="-40" cy="50" r="4" fill="url(#purpleGem)" opacity="0.6"/>
+    <circle cx="-10" cy="60" r="5" fill="url(#clearGem)" opacity="0.5"/>
+    <circle cx="15" cy="55" r="4" fill="url(#pinkGem)" opacity="0.6"/>
+    <circle cx="40" cy="45" r="3" fill="url(#blueGem)" opacity="0.5"/>
+    <circle cx="60" cy="30" r="5" fill="url(#purpleGem)" opacity="0.5"/>
+    <circle cx="70" cy="10" r="4" fill="url(#clearGem)" opacity="0.6"/>
+    <circle cx="65" cy="-15" r="5" fill="url(#pinkGem)" opacity="0.5"/>
+    <circle cx="55" cy="-40" r="4" fill="url(#blueGem)" opacity="0.6"/>
+    <circle cx="35" cy="-55" r="3" fill="url(#purpleGem)" opacity="0.5"/>
+    <circle cx="10" cy="-65" r="5" fill="url(#clearGem)" opacity="0.5"/>
+    <circle cx="-15" cy="-60" r="4" fill="url(#pinkGem)" opacity="0.6"/>
+    <circle cx="-40" cy="-45" r="3" fill="url(#blueGem)" opacity="0.5"/>
+    <circle cx="-60" cy="-35" r="5" fill="url(#purpleGem)" opacity="0.5"/>
+    
+    <!-- Light reflections -->
+    <circle cx="-5" cy="-5" r="2" fill="white" opacity="0.9"/>
+    <circle cx="27" cy="-12" r="3" fill="white" opacity="0.8"/>
+    <circle cx="-20" cy="18" r="2" fill="white" opacity="0.9"/>
+    <circle cx="-30" cy="-17" r="3" fill="white" opacity="0.8"/>
+    <circle cx="17" cy="20" r="2" fill="white" opacity="0.9"/>
+  </g>
+</svg>
