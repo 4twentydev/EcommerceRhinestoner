@@ -181,7 +181,7 @@ export default function Home() {
             Welcome to <span className="text-brand-lt-cyan font-semibold">Rhinestoner</span>{" "}
           </motion.h1>
           <motion.h4
-            className="font-sans text-lg md:text-xl text-light/80 max-w-2xl mx-auto mb-10"
+            className="font-sans text-lg md:text-xl text-brand-light/80 max-w-2xl mx-auto mb-10"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -195,14 +195,14 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.6 }}
           >
             <Link href="/new-arrivals">
-              <Button className="px-8 py-3 bg-primary text-primary-foreground font-medium rounded-full hover:bg-primary/90 transition-colors">
+              <Button className="px-8 py-3 bg-brand-lt-cyan text-brand-dark font-medium rounded-full hover:bg-brand-lt-cyan/90 transition-colors">
                 Explore New Arrivals
               </Button>
             </Link>
             <Link href="/products">
               <Button
                 variant="outline"
-                className="px-8 py-3 bg-transparent border border-light text-light font-medium rounded-full hover:bg-light/10 transition-colors"
+                className="px-8 py-3 bg-transparent border border-brand-light text-brand-light font-medium rounded-full hover:bg-brand-light/10 transition-colors"
               >
                 Browse All Products
               </Button>
@@ -222,7 +222,7 @@ export default function Home() {
             animate={{ y: [0, 10, 0] }}
             transition={{ repeat: Infinity, duration: 1.5 }}
           >
-            <FaChevronDown className="text-light/70" />
+            <FaChevronDown className="text-brand-light/70" />
           </motion.a>
         </motion.div>
       </Section>
