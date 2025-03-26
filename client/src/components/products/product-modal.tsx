@@ -72,10 +72,10 @@ export default function ProductModal({
           variants={modalVariants}
           transition={{ duration: 0.2 }}
         >
-          <div className="absolute inset-0 bg-dark/80 backdrop-blur-sm" onClick={onClose}></div>
+          <div className="absolute inset-0 bg-brand-dark/80 backdrop-blur-sm" onClick={onClose}></div>
           
           <motion.div 
-            className="relative bg-dark border border-muted/20 rounded-lg shadow-2xl w-full max-w-5xl mx-4 overflow-hidden"
+            className="relative bg-brand-dark border border-muted/20 rounded-lg shadow-2xl w-full max-w-5xl mx-4 overflow-hidden"
             variants={contentVariants}
             transition={{ duration: 0.3, delay: 0.1 }}
           >
@@ -83,7 +83,7 @@ export default function ProductModal({
               variant="ghost" 
               size="icon" 
               onClick={onClose}
-              className="absolute top-4 right-4 z-10 w-8 h-8 flex items-center justify-center rounded-full bg-dark/60 text-light hover:bg-primary hover:text-dark transition-colors"
+              className="absolute top-4 right-4 z-10 w-8 h-8 flex items-center justify-center rounded-full bg-brand-dark/60 text-brand-light hover:bg-brand-lt-cyan hover:text-brand-dark transition-colors"
             >
               <FaTimes />
             </Button>
@@ -91,11 +91,11 @@ export default function ProductModal({
             <div className="flex flex-col md:flex-row">
               {/* Product Images */}
               <div className="w-full md:w-1/2 h-80 md:h-auto flex">
-                <div className="w-1/4 bg-dark/80 hidden md:block">
+                <div className="w-1/4 bg-brand-dark/80 hidden md:block">
                   {productImages.map((image, index) => (
                     <div 
                       key={index}
-                      className={`h-24 p-2 cursor-pointer ${activeImage === index ? 'border-l-4 border-primary' : ''}`}
+                      className={`h-24 p-2 cursor-pointer ${activeImage === index ? 'border-l-4 border-brand-lt-cyan' : ''}`}
                       onClick={() => setActiveImage(index)}
                     >
                       <img 
@@ -119,7 +119,7 @@ export default function ProductModal({
               {/* Product Details */}
               <div className="w-full md:w-1/2 p-6 md:p-8">
                 {product.isNew && (
-                  <span className="inline-block bg-secondary/20 text-secondary text-xs font-semibold px-2 py-1 rounded">
+                  <span className="inline-block bg-brand-lt-green/20 text-brand-lt-green text-xs font-semibold px-2 py-1 rounded">
                     NEW ARRIVAL
                   </span>
                 )}
