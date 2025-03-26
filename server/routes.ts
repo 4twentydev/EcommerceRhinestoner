@@ -1,7 +1,8 @@
-import type { Express } from "express";
+import type { Express, Request, Response } from "express";
 import { createServer, type Server } from "http";
 import express from "express";
 import path from "path";
+import fs from "fs";
 import { storage } from "./storage";
 import Stripe from "stripe";
 
@@ -93,6 +94,81 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(201).json({ order, items: orderItems });
     } catch (error: any) {
       res.status(500).json({ error: error.message });
+    }
+  });
+  
+  // Dynamic Open Graph meta tags for social media sharing
+  app.get("/social-preview/product/:id", async (req, res) => {
+    try {
+      const product = await storage.getProduct(Number(req.params.id));
+      
+      if (!product) {
+        return res.status(404).send("Product not found");
+      }
+      
+      const productUrl = `${req.protocol}://${req.get('host')}/products/${product.id}`;
+      
+      // Read the index.html file to modify with our meta tags
+      let htmlContent;
+      const indexPath = path.resolve(process.cwd(), 'client', 'dist', 'index.html');
+      
+      try {
+        htmlContent = fs.readFileSync(indexPath, 'utf8');
+      } catch (error) {
+        // If the file doesn't exist (during development), create a basic HTML template
+        htmlContent = `
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>${product.title} - Preview</title>
+          </head>
+          <body>
+            <div style="display: flex; max-width: 600px; margin: 0 auto; padding: 20px; font-family: system-ui, -apple-system, sans-serif;">
+              <div style="margin-right: 20px;">
+                <img src="${product.image}" alt="${product.title}" style="max-width: 200px; border-radius: 8px;">
+              </div>
+              <div>
+                <h1 style="margin-top: 0; color: #333;">${product.title}</h1>
+                <p style="color: #666;">${product.description}</p>
+                <p style="font-weight: bold; color: #0891B2;">${product.formattedPrice}</p>
+                <a href="${productUrl}" style="display: inline-block; background-color: #0891B2; color: white; padding: 10px 15px; text-decoration: none; border-radius: 4px;">View Product</a>
+              </div>
+            </div>
+          </body>
+          </html>
+        `;
+      }
+      
+      // Generate meta tags for this product
+      const metaTags = `
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="product" />
+        <meta property="og:url" content="${req.protocol}://${req.get('host')}/products/${product.id}" />
+        <meta property="og:title" content="${product.title}" />
+        <meta property="og:description" content="${product.description}" />
+        <meta property="og:image" content="${product.image}" />
+        <meta property="product:price:amount" content="${product.price}" />
+        <meta property="product:price:currency" content="USD" />
+        
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="${req.protocol}://${req.get('host')}/products/${product.id}" />
+        <meta property="twitter:title" content="${product.title}" />
+        <meta property="twitter:description" content="${product.description}" />
+        <meta property="twitter:image" content="${product.image}" />
+      `;
+      
+      // Insert meta tags before the closing </head> tag
+      htmlContent = htmlContent.replace('</head>', `${metaTags}\n</head>`);
+      
+      // Send the modified HTML content
+      res.set('Content-Type', 'text/html');
+      res.send(htmlContent);
+    } catch (error: any) {
+      console.error("Error generating social preview:", error);
+      res.status(500).send("Error generating preview");
     }
   });
 

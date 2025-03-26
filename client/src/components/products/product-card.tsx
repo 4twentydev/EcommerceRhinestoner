@@ -2,6 +2,7 @@ import { Product } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { FaEye } from "react-icons/fa";
+import SocialShare from "./social-share";
 
 type ProductCardProps = {
   product: Product;
@@ -34,7 +35,7 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
         <p className="text-brand-light/80 text-sm mb-2">
           {product.description.substring(0, 30)}...
         </p>
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center mb-3">
           <span className="font-heading font-semibold">{product.formattedPrice}</span>
           <Button 
             variant="ghost" 
@@ -43,6 +44,10 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
           >
             <FaEye className="mr-1 h-4 w-4" /> Quick View
           </Button>
+        </div>
+        
+        <div className="flex justify-end">
+          <SocialShare product={product} />
         </div>
       </div>
     </motion.div>

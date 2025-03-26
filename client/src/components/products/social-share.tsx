@@ -15,6 +15,8 @@ export default function SocialShare({ product }: SocialShareProps) {
   const [copied, setCopied] = useState(false);
   const { toast } = useToast();
   
+  // Use the product URL or the social preview URL for better sharing experience
+  const previewUrl = `${window.location.origin}/social-preview/product/${product.id}`;
   const productUrl = `${window.location.origin}/products/${product.id}`;
   const shareMessage = `Check out ${product.title} - ${product.formattedPrice}`;
   
@@ -23,25 +25,25 @@ export default function SocialShare({ product }: SocialShareProps) {
       name: "Facebook",
       icon: <FaFacebook className="h-5 w-5" />,
       color: "#1877F2",
-      url: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(productUrl)}&quote=${encodeURIComponent(shareMessage)}`,
+      url: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(previewUrl)}&quote=${encodeURIComponent(shareMessage)}`,
     },
     {
       name: "Twitter",
       icon: <FaTwitter className="h-5 w-5" />,
       color: "#1DA1F2",
-      url: `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareMessage)}&url=${encodeURIComponent(productUrl)}`,
+      url: `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareMessage)}&url=${encodeURIComponent(previewUrl)}`,
     },
     {
       name: "Pinterest",
       icon: <FaPinterest className="h-5 w-5" />,
       color: "#E60023",
-      url: `https://pinterest.com/pin/create/button/?url=${encodeURIComponent(productUrl)}&media=${encodeURIComponent(product.image)}&description=${encodeURIComponent(shareMessage)}`,
+      url: `https://pinterest.com/pin/create/button/?url=${encodeURIComponent(previewUrl)}&media=${encodeURIComponent(product.image)}&description=${encodeURIComponent(shareMessage)}`,
     },
     {
       name: "WhatsApp",
       icon: <FaWhatsapp className="h-5 w-5" />,
       color: "#25D366",
-      url: `https://wa.me/?text=${encodeURIComponent(shareMessage + ' ' + productUrl)}`,
+      url: `https://wa.me/?text=${encodeURIComponent(shareMessage + ' ' + previewUrl)}`,
     },
     {
       name: "Email",
@@ -53,7 +55,8 @@ export default function SocialShare({ product }: SocialShareProps) {
 
   const copyToClipboard = async () => {
     try {
-      await navigator.clipboard.writeText(productUrl);
+      // Use the preview URL for better social media sharing
+      await navigator.clipboard.writeText(previewUrl);
       setCopied(true);
       toast({
         title: "Link copied",
