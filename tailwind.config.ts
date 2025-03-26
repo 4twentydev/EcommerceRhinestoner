@@ -11,6 +11,7 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       colors: {
+        // Theme system colors
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {
@@ -60,6 +61,21 @@ export default {
           "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
+        },
+        
+        // New color palette
+        brand: {
+          dark: "#1E293B",
+          light: "#CBD5E1",
+          "lt-cyan": "#22D3EC",
+          "dk-cyan": "#0891B2",
+          "lt-green": "#A3E635",
+          "dk-green": "#65A300",
+          "lt-yellow": "#FCF08A",
+          "dk-yellow": "#FACC15",
+          "lt-pink": "#59A8D4",
+          "dk-pink": "#F472B6",
+          muted: "#A1A1AA"
         },
       },
       keyframes: {
