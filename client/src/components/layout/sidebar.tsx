@@ -94,7 +94,7 @@ export default function Sidebar() {
                 {/* Menu Header */}
                 <div className="flex justify-between items-center p-6">
                   <Link href="/" onClick={handleLinkClick} className="flex items-center space-x-3">
-                    <FaCube className="text-green-500 text-3xl" />
+                    <FaCube className="text-[#67b4ff] text-3xl" />
                     <h1 className="text-2xl font-heading font-bold">Rhinestoner</h1>
                   </Link>
                   <Button 
@@ -124,8 +124,8 @@ export default function Sidebar() {
                           className={cn(
                             "flex items-center space-x-4 p-4 rounded-lg text-lg transition-colors",
                             location === item.path 
-                              ? "bg-green-500/20 text-green-500 font-medium" 
-                              : "text-foreground hover:bg-green-500/10"
+                              ? "bg-[#67b4ff]/20 text-[#67b4ff] font-medium" 
+                              : "text-foreground hover:bg-[#67b4ff]/10"
                           )}
                         >
                           <span className="text-2xl">{item.icon}</span>
@@ -144,7 +144,7 @@ export default function Sidebar() {
                       <Link 
                         href="#login" 
                         onClick={handleLinkClick}
-                        className="flex items-center space-x-4 p-4 rounded-lg text-lg font-medium text-white bg-green-500 hover:bg-green-600 transition-colors"
+                        className="flex items-center space-x-4 p-4 rounded-lg text-lg font-medium text-white bg-[#67b4ff] hover:bg-[#48a2ff] transition-colors"
                       >
                         <span className="text-2xl"><FaSignInAlt /></span>
                         <span>Login</span>
