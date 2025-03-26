@@ -97,7 +97,12 @@ export default function Home() {
   const { toast } = useToast();
 
   // Handle cart functionality safely
-  let cartFunctions = { addToCart: (cartItem: any) => {} };
+  let cartFunctions = { 
+    addToCart: (cartItem: any) => {
+      console.log("Cart operation not available");
+    } 
+  };
+  
   try {
     cartFunctions = useCart();
   } catch (error) {

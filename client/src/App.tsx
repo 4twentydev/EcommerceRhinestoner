@@ -11,7 +11,7 @@ import Sidebar from "@/components/layout/sidebar";
 import ThemeToggle from "@/components/layout/theme-toggle";
 import Footer from "@/components/layout/footer";
 import NotFound from "@/pages/not-found";
-import { CartProvider } from "@/context/cart-context";
+// CartProvider is already in main.tsx
 import CartPanel from "@/components/layout/cart-panel";
 
 function Router() {
