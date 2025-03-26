@@ -9,7 +9,6 @@ import Contact from "@/pages/contact";
 import Checkout from "@/pages/checkout";
 import Sidebar from "@/components/layout/sidebar";
 import ThemeToggle from "@/components/layout/theme-toggle";
-import SocialLinks from "@/components/layout/social-links";
 import Footer from "@/components/layout/footer";
 import NotFound from "@/pages/not-found";
 import { CartProvider } from "@/context/cart-context";
@@ -34,7 +33,6 @@ function App() {
       <ThemeToggle />
       <Sidebar />
       <CartPanel />
-      <SocialLinks />
       <main className="w-full">
         <Router />
         <Footer />
