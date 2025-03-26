@@ -239,12 +239,12 @@ export default function Home() {
           >
             <div className="flex items-center justify-between">
               <h2 className="text-3xl md:text-4xl font-heading flex items-center">
-                <FaStar className="text-primary mr-2" /> New Arrivals
+                <FaStar className="text-brand-lt-cyan mr-2" /> New Arrivals
               </h2>
               <Link href="/new-arrivals">
                 <Button
                   variant="ghost"
-                  className="flex items-center gap-2 text-primary hover:bg-primary/10"
+                  className="flex items-center gap-2 text-brand-lt-cyan hover:bg-brand-lt-cyan/10"
                 >
                   View All <FaChevronRight className="h-3 w-3" />
                 </Button>
@@ -264,10 +264,10 @@ export default function Home() {
                 key={product.id}
                 whileHover={{ y: -5 }}
                 transition={{ duration: 0.2 }}
-                className="bg-primary/5 border border-border/40 rounded-lg overflow-hidden group"
+                className="bg-brand-lt-cyan/5 border border-border/40 rounded-lg overflow-hidden group"
               >
                 <div className="h-64 overflow-hidden relative">
-                  <div className="absolute top-2 right-2 z-10 bg-primary text-primary-foreground text-xs font-bold px-2 py-1 rounded">
+                  <div className="absolute top-2 right-2 z-10 bg-brand-lt-cyan text-brand-dark text-xs font-bold px-2 py-1 rounded">
                     NEW
                   </div>
                   <img
@@ -291,7 +291,7 @@ export default function Home() {
                         setIsModalOpen(true);
                       }}
                       variant="outline"
-                      className="border-primary text-primary hover:bg-primary hover:text-primary-foreground text-sm"
+                      className="border-brand-lt-cyan text-brand-lt-cyan hover:bg-brand-lt-cyan hover:text-brand-dark text-sm"
                       size="sm"
                     >
                       View Details
@@ -321,7 +321,7 @@ export default function Home() {
               <Link href="/products">
                 <Button
                   variant="ghost"
-                  className="flex items-center gap-2 text-primary hover:bg-primary/10"
+                  className="flex items-center gap-2 text-brand-lt-cyan hover:bg-brand-lt-cyan/10"
                 >
                   View All <FaChevronRight className="h-3 w-3" />
                 </Button>
@@ -370,7 +370,7 @@ export default function Home() {
             </p>
             <Button
               variant="outline"
-              className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+              className="border-brand-lt-cyan text-brand-lt-cyan hover:bg-brand-lt-cyan hover:text-brand-dark"
             >
               Learn More About Us
             </Button>
@@ -386,7 +386,7 @@ export default function Home() {
           style={{ backgroundImage: 'url("/BG.svg")' }}
         >
           {/* Add a slight overlay for better text contrast */}
-          <div className="absolute inset-0 bg-gradient-to-r from-background/30 to-primary/20"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-background/30 to-brand-lt-cyan/20"></div>
         </div>
         <div className="container mx-auto px-6 py-20 relative z-10">
           <motion.div
@@ -416,7 +416,7 @@ export default function Home() {
                     <input
                       id="name"
                       type="text"
-                      className="w-full px-4 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50"
+                      className="w-full px-4 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-brand-lt-cyan/50"
                       placeholder="Your name"
                     />
                   </div>
@@ -450,7 +450,7 @@ export default function Home() {
                   ></textarea>
                 </div>
                 <div className="text-center">
-                  <Button className="px-8 py-3 bg-primary text-primary-foreground font-medium rounded-full hover:bg-primary/90 transition-colors">
+                  <Button className="px-8 py-3 bg-brand-lt-cyan text-brand-dark font-medium rounded-full hover:bg-brand-lt-cyan/90 transition-colors">
                     Send Message
                   </Button>
                 </div>
